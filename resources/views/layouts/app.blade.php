@@ -13,7 +13,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body id="app" class="@yield('body_class') bg-beige text-gray-800 font-sans">
+<body id="app" class="@yield('body_class') bg-[#F8F8F8] text-gray-800 font-sans">
 
     {{-- TOP/MENU → 透明ヘッダー、その他 → 通常ヘッダー --}}
     @include('partials.header', [

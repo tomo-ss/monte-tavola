@@ -26,3 +26,13 @@ Route::get('/menu/seasonal', function () {
 Route::get('/access', function () {
     return view('access');
 });
+
+
+// ======================================
+// お問い合わせ（Contact）
+// ======================================
+use App\Http\Controllers\ContactController;
+
+Route::get('/contact', [ContactController::class, 'form'])->name('contact.form');
+Route::post('/contact/confirm', [ContactController::class, 'confirm'])->name('contact.confirm');
+Route::post('/contact/complete', [ContactController::class, 'complete'])->name('contact.complete');

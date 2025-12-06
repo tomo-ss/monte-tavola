@@ -85,7 +85,7 @@
         ご予約はこちら
       </a>
 
-      <a href="#contact" class="mt-3 inline-block text-[#363427] underline hover:text-green-700 font-medium">
+      <a href="/contact" class="mt-3 inline-block text-[#363427] underline hover:text-green-700 font-medium">
         ご予約以外のお問い合わせはこちらから
       </a>
     </div>
