@@ -47,8 +47,7 @@
                     name="name"
                     value="{{ old('name') }}"
                     class="w-full border border-[#D6D3CE] p-3 rounded bg-[#F8F8F8] focus:ring-2 focus:ring-[#363427]"
-                    placeholder="例）山中 三郎"
-                    required>
+                    placeholder="例）山中 三郎">
             </div>
 
             {{-- メールアドレス --}}
@@ -61,8 +60,7 @@
                     name="email"
                     value="{{ old('email') }}"
                     class="w-full border border-[#D6D3CE] p-3 rounded bg-[#F8F8F8] focus:ring-2 focus:ring-[#363427]"
-                    placeholder="例）yamanaka@example.com"
-                    required>
+                    placeholder="例）yamanaka@example.com">
             </div>
 
             {{-- 件名 --}}
@@ -74,8 +72,7 @@
                 <input type="text" 
                     name="subject"
                     value="{{ old('subject') }}"
-                    class="w-full border border-[#D6D3CE] p-3 rounded bg-[#F8F8F8] focus:ring-2 focus:ring-[#363427]"
-                    required>
+                    class="w-full border border-[#D6D3CE] p-3 rounded bg-[#F8F8F8] focus:ring-2 focus:ring-[#363427]">
             </div>
 
             {{-- 本文 --}}
@@ -87,8 +84,8 @@
                 <textarea 
                     name="message" 
                     rows="10"
-                    class="w-full border border-[#D6D3CE] p-3 rounded bg-[#F8F8F8] focus:ring-2 focus:ring-[#363427]"
-                    required>{{ old('message') }}</textarea>
+                    class="w-full border border-[#D6D3CE] p-3 rounded bg-[#F8F8F8] focus:ring-2 focus:ring-[#363427]">
+                    {{ old('message') }}</textarea>
             </div>
 
             {{-- ボタン --}}
