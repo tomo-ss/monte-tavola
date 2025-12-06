@@ -23,6 +23,31 @@
 </section>
 
 
+{{-- Menu Navigation Tabs --}}
+<section class="mt-10 mb-12">
+    <div class="w-full flex justify-center">
+        <div class="inline-flex space-x-10 text-lg font-medium">
+
+            <a href="/menu/food" 
+               class="text-[#6B6861] hover:text-[#363427] pb-1 transition">
+                Food
+            </a>
+
+            <a href="/menu/drink" 
+               class="text-[#363427] border-b-2 border-[#363427] pb-1">
+                Drink
+            </a>
+
+            <a href="/menu/seasonal" 
+               class="text-[#6B6861] hover:text-[#363427] pb-1 transition">
+                Seasonal
+            </a>
+
+        </div>
+    </div>
+</section>
+
+
 {{-- Drink Items --}}
 <section class="py-20 max-w-5xl mx-auto px-6">
 

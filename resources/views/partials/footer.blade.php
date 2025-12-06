@@ -16,27 +16,25 @@
         {{-- ボーダー --}}
         <div class="border-t-2 border-[#F8F8F8]/40 pt-6">
 
-
             {{-- 下段：左寄せナビ（縦線区切り） --}}
             <nav class="flex items-center gap-4 text-sm mb-4">
 
                 <a href="#about" class="hover:text-[#A6AEC1] transition">About Us</a>
-
                 <span class="text-white/30">|</span>
 
                 <a href="#news" class="hover:text-[#A6AEC1] transition">News</a>
-
                 <span class="text-white/30">|</span>
 
                 <a href="#menu" class="hover:text-[#A6AEC1] transition">Menu</a>
-
                 <span class="text-white/30">|</span>
 
                 <a href="#reservation" class="hover:text-[#A6AEC1] transition">Reservation</a>
-
                 <span class="text-white/30">|</span>
 
-                <a href="#contact" class="hover:text-[#A6AEC1] transition">Contact</a>
+                <a href="/access" class="hover:text-[#A6AEC1] transition">Access</a>
+                <span class="text-white/30">|</span>
+
+                <a href="/contact" class="hover:text-[#A6AEC1] transition">Contact</a>
 
             </nav>
 

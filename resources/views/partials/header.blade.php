@@ -11,10 +11,11 @@
 
         {{-- ナビ --}}
         <nav class="hidden md:flex space-x-12 text-lg font-medium ml-auto pr-0">
-            <a href="/about" class="hover:opacity-80">About Us</a>
+            <a href="/#about" class="hover:opacity-80">About Us</a>
             <a href="/news" class="hover:opacity-80">News</a>
-            <a href="/menu" class="hover:opacity-80">Menu</a>
+            <a href="/#menu" class="hover:opacity-80">Menu</a>
             <a href="/reservation" class="hover:opacity-80">Reservation</a>
+            <a href="/access" class="hover:opacity-80">Access</a>
             <a href="/contact" class="hover:opacity-80">Contact</a>
         </nav>
 
