@@ -121,23 +121,45 @@
 
     <h2 class="text-5xl font-bold text-center text-[#363427] mb-2">News</h2>
     <p class="text-center text-[#363427] mb-8">おしらせ</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-    <div class="flex flex-col md:flex-row gap-6 justify-center">
-      <div class="border rounded p-4 shadow-sm flex-1">
-        <h3 class="text-lg text-[#363427] font-semibold">秋限定メニュー販売開始</h3>
-        <p class="text-sm text-gray-500">2025.10.21</p>
-      </div>
+  @forelse($latest_news as $item)
+    <a href="{{ route('news.show', $item->id) }}"
+       class="bg-white rounded overflow-hidden shadow hover:opacity-90 transition block">
 
-      <div class="border rounded p-4 shadow-sm flex-1">
-        <h3 class="text-lg text-[#363427] font-semibold">11月の臨時休業のおしらせ</h3>
-        <p class="text-sm text-gray-500">2025.10.01</p>
-      </div>
+        {{-- 画像 --}}
+        <div class="overflow-hidden">
+            @if ($item->image_path)
+                <img src="{{ asset('storage/' . $item->image_path) }}"
+                     class="w-full h-48 object-cover transition-transform duration-500 hover:scale-110">
+            @else
+                <div class="w-full h-48 bg-gray-200"></div>
+            @endif
+        </div>
 
-      <div class="border rounded p-4 shadow-sm flex-1">
-        <h3 class="text-lg text-[#363427] font-semibold">10月の臨時休業のおしらせ</h3>
-        <p class="text-sm text-gray-500">2025.09.01</p>
-      </div>
-    </div>
+        <div class="p-4">
+            {{-- タイトル --}}
+            <h3 class="text-lg text-[#363427] font-semibold mb-2">
+                {{ $item->title }}
+            </h3>
+
+            {{-- 公開日 --}}
+            <p class="text-sm text-gray-500">
+                {{ \Carbon\Carbon::parse($item->published_at)->format('Y.m.d') }}
+            </p>
+        </div>
+
+    </a>
+  @empty
+    <p class="text-center text-gray-500">お知らせはまだありません。</p>
+  @endforelse
+
+</div>
+
+
+</div>
+
+
 
     <div class="mt-8 text-center">
       <a href="/news"

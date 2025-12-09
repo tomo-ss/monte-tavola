@@ -5,9 +5,9 @@ use Illuminate\Support\Facades\Route;
 // ===============================
 // TOP
 // ===============================
-Route::get('/', function () {
-    return view('top');
-});
+use App\Http\Controllers\TopController;
+
+Route::get('/', [TopController::class, 'index'])->name('top');
 
 // ===============================
 // Menu

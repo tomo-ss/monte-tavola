@@ -13,11 +13,13 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
 
         @foreach ($news as $item)
-            <div class="shadow bg-white rounded overflow-hidden">
+            <a href="{{ route('news.show', $item->id) }}"
+               class="block shadow bg-white rounded overflow-hidden hover:opacity-90 transition">
 
                 {{-- 画像 --}}
                 @if ($item->image_path)
-                    <img src="{{ asset('storage/' . $item->image_path) }}" class="w-full h-60 object-cover">
+                    <img src="{{ asset('storage/' . $item->image_path) }}"
+                         class="w-full h-60 object-cover">
                 @else
                     <div class="w-full h-60 bg-gray-200"></div>
                 @endif
@@ -34,7 +36,7 @@
                     </p>
                 </div>
 
-            </div>
+            </a>
         @endforeach
 
     </div>
