@@ -76,7 +76,7 @@
       </div>
 
       {{-- 予約ボタン --}}
-      <a href="#reservation"
+      <a href="/reservation"
         class="btn-swipe-left-to-right inline-flex w-full md:w-[300px] h-[56px] md:h-[64px]
               px-6 justify-center items-center
               rounded-[10px] border border-[#363427]
