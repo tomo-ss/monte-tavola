@@ -21,6 +21,19 @@ Route::get('/access', fn() => view('access'));
 
 
 // ===============================
+// 予約フォーム（Reservation）
+// ===============================
+use App\Http\Controllers\ReservationController;
+
+Route::get('/reservation', [ReservationController::class, 'create'])
+    ->name('reservation.create');
+
+Route::post('/reservation', [ReservationController::class, 'store'])
+    ->name('reservation.store');
+
+
+
+// ===============================
 // お問い合わせ（Contact）
 // ===============================
 use App\Http\Controllers\ContactController;
@@ -68,3 +81,4 @@ use App\Http\Controllers\NewsController as UserNewsController;
 
 Route::get('/news', [UserNewsController::class, 'index'])->name('news.index');
 Route::get('/news/{id}', [UserNewsController::class, 'show'])->name('news.show');
+
