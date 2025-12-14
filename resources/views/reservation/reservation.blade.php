@@ -33,7 +33,7 @@
 
     {{-- フォーム本体 --}}
     <div class="max-w-[920px] mx-auto">
-        <div class="bg-[#F5EFEE] rounded-[24px] px-6 md:px-16 py-12 md:py-14">
+        <div class="bg-[#F1ECEB] rounded-[24px] px-6 md:px-16 py-12 md:py-14">
 
             <form method="POST" action="{{ route('reservation.confirm') }}">
 
