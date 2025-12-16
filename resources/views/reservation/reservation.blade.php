@@ -54,7 +54,7 @@
                             </span>
                         </div>
                         <div>
-                            <input type="date" name="date" value="{{ old('date') }}"
+                            <input type="date" name="date" id="date" value="{{ old('date') }}"
                                    class="w-full h-11 rounded-lg border border-[#363427]/20 bg-white px-4 text-sm text-[#363427]
                                           focus:outline-none focus:ring-2 focus:ring-[#363427]/20 focus:border-[#363427]/40">
                         </div>
@@ -68,23 +68,32 @@
                                 必須
                             </span>
                         </div>
-                    <select name="time"
-                    class="w-full h-11 rounded-lg border border-[#363427]/20 bg-white px-4 text-sm text-[#363427]
-                        focus:outline-none focus:ring-2 focus:ring-[#363427]/20 focus:border-[#363427]/40">
-                <option value="">選択してください</option>
+                         @php
+                            // 選択されている日付（未選択なら null）
+                            $selectedDate = old('date');
 
-                @php
-                    $start = \Carbon\Carbon::createFromFormat('H:i', '11:00');
-                    $end   = \Carbon\Carbon::createFromFormat('H:i', '16:00'); // ←最終受付などに合わせて変えてOK
-                @endphp
+                            // 選択された日の予約済み時間一覧
+                            $reservedForDate = $selectedDate && isset($reservedTimes[$selectedDate])
+                                ? $reservedTimes[$selectedDate]
+                                : collect();
+                        @endphp
 
-                @for ($t = $start->copy(); $t->lte($end); $t->addMinutes(30))
-                    @php $val = $t->format('H:i'); @endphp
-                    <option value="{{ $val }}" {{ old('time') === $val ? 'selected' : '' }}>
-                        {{ $val }}
-                    </option>
-                @endfor
-            </select>
+    <select name="time" id="time" disabled
+    class="w-full h-11 rounded-lg border border-[#363427]/20 bg-white px-4 text-sm text-[#363427]
+        focus:outline-none focus:ring-2 focus:ring-[#363427]/20 focus:border-[#363427]/40">
+    <option value="">選択してください</option>
+
+    @php
+        $start = \Carbon\Carbon::createFromFormat('H:i', '11:00');
+        $end   = \Carbon\Carbon::createFromFormat('H:i', '16:00');
+    @endphp
+
+    @for ($t = $start->copy(); $t->lte($end); $t->addMinutes(30))
+        <option value="{{ $t->format('H:i') }}">
+            {{ $t->format('H:i') }}
+        </option>
+    @endfor
+</select>
 
 
                     {{-- 人数 --}}
@@ -222,4 +231,29 @@
         </div>
     </div>
 </div>
+
+<script>
+    const reservedTimes = @json($reservedTimes);
+
+    const dateInput = document.getElementById('date');
+    const timeSelect = document.getElementById('time');
+
+    dateInput.addEventListener('change', () => {
+        timeSelect.disabled = false;
+
+        const date = dateInput.value;
+        const reserved = reservedTimes[date] ?? [];
+
+        [...timeSelect.options].forEach(option => {
+            if (!option.value) return;
+            option.disabled = reserved.includes(option.value);
+        });
+    });
+
+    // エラーで戻ってきた場合も自動反映
+if (dateInput.value) {
+    dateInput.dispatchEvent(new Event('change'));
+}
+
+</script>
 @endsection

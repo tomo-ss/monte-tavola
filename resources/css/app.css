@@ -59,3 +59,8 @@
 .zoom-kenburns {
     animation: kenburns 8s ease-out infinite alternate;
 }
+
+/* 予約済の時間のグレーアウト*/
+option:disabled {
+    color: #999;
+}
