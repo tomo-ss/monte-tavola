@@ -23,7 +23,7 @@
 
   <div class="grid grid-cols-[160px_1fr] gap-y-4 text-sm max-w-md mx-auto">
     <div>来店日</div>
-    <div>{{ $data['date'] }}</div>
+    <div>{{ \Carbon\Carbon::parse($data['date'])->format('Y/m/d') }}</div>
 
     <div>来店時間</div>
     <div>{{ $data['time'] }}</div>
@@ -73,10 +73,10 @@
         <form method="POST" action="{{ route('reservation.store') }}"
               class="flex justify-center gap-6">
             @csrf
-
             @foreach ($data as $key => $value)
-                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                <input type="hidden" name="{{ $key }}" value="{{ $value ?? '' }}">
             @endforeach
+
 
             <button type="button"
                     onclick="history.back()"

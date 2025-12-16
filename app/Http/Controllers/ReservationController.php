@@ -4,40 +4,58 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ReservationRequest;
 use App\Models\Reservation;
-use Illuminate\Http\Request;
 
 class ReservationController extends Controller
 {
     /**
-     * 新規作成 → フォーム表示
+     * 予約フォーム表示
      */
     public function create()
     {
         return view('reservation.reservation');
-        // ※ resources/views/reservation/reservation.blade.php
     }
 
     /**
-     * 新規作成 → 確認画面
+     * 予約内容 確認画面表示
      */
     public function confirm(ReservationRequest $request)
     {
-        // バリデーション済みの入力データを取得
+        // バリデーション済みの入力データのみ取得
         $data = $request->validated();
 
-        // 確認画面へ表示
+        // 確認画面へデータを渡す
         return view('reservation.confirm', compact('data'));
     }
 
     /**
-     * 新規作成 → 保存処理
+     * 予約内容 保存処理
      */
-    public function store(Request $request)
+    public function store(ReservationRequest $request)
     {
-        // 確認画面から送信された内容を保存
-        Reservation::create($request->all());
+        // バリデーション済みデータをDBに保存
+        $reservation = Reservation::create($request->validated());
 
-        // 完了画面へリダイレクト（PRGパターン）
-        return redirect()->route('reservation.complete');
+        // 保存した予約情報をセッションに一時保存し、
+        // 完了画面で表示できるようにする
+        return redirect()
+            ->route('reservation.complete')
+            ->with('reservation', $reservation);
+    }
+
+    /**
+     * 予約完了画面表示
+     */
+    public function complete()
+    {
+        // セッションに予約情報が存在しない場合は不正遷移とみなし、
+        // 予約フォームへリダイレクトする
+        if (!session()->has('reservation')) {
+            return redirect()->route('reservation.create');
+        }
+
+        // セッションから予約情報を取得して完了画面へ渡す
+        return view('reservation.complete', [
+            'reservation' => session('reservation'),
+        ]);
     }
 }

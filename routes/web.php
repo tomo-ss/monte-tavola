@@ -48,12 +48,13 @@ Route::post('/reservation/confirm', [ReservationController::class, 'confirm'])
     ->name('reservation.confirm');
 
 // 新規作成 → 保存処理
-Route::post('/reservation', [ReservationController::class, 'store'])
+Route::post('/reservation/store', [ReservationController::class, 'store'])
     ->name('reservation.store');
 
 // 完了画面
-Route::get('/reservation/complete', fn () => view('reservation.complete'))
+Route::get('/reservation/complete', [ReservationController::class, 'complete'])
     ->name('reservation.complete');
+
 
 
 // ===============================
