@@ -75,6 +75,36 @@ Route::post('/contact/complete', [ContactController::class, 'complete'])
     ->name('contact.complete');
 
 
+
+// ===============================
+// ユーザー側：お知らせ（News / Public）
+// ===============================
+use App\Http\Controllers\NewsController as UserNewsController;
+
+// 一覧表示
+Route::get('/news', [UserNewsController::class, 'index'])
+    ->name('news.index');
+
+// 詳細表示
+Route::get('/news/{id}', [UserNewsController::class, 'show'])
+    ->name('news.show');
+
+
+
+// ===============================
+// 管理側：TOP（News / Admin）
+// ===============================
+Route::middleware('auth')->prefix('admin')->group(function () {
+    Route::get('/', function () {
+        return view('admin.index');
+    })->name('admin.index');
+});
+
+
+
+
+
+
 // ===============================
 // 管理側：お知らせ（News / Admin）
 // ===============================
@@ -115,16 +145,11 @@ Route::prefix('admin')->group(function () {
         ->name('admin.news.delete');
 });
 
+//後で消す仮ログイン
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
-// ===============================
-// ユーザー側：お知らせ（News / Public）
-// ===============================
-use App\Http\Controllers\NewsController as UserNewsController;
-
-// 一覧表示
-Route::get('/news', [UserNewsController::class, 'index'])
-    ->name('news.index');
-
-// 詳細表示
-Route::get('/news/{id}', [UserNewsController::class, 'show'])
-    ->name('news.show');
+Route::get('/test-login', function () {
+    Auth::login(User::first());
+    return redirect('/admin');
+});

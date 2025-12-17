@@ -8,7 +8,8 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body class="bg-[#E8EBF0] text-[#363427]">
+<body class="bg-[#E8EBF0] text-[#363427] min-h-screen flex flex-col">
+
 
     {{-- ====== ヘッダー ====== --}}
     <header class="bg-[#22314C] text-white py-4">
@@ -23,17 +24,21 @@
                 <a href="/admin/contact" class="hover:opacity-80">お問い合わせ管理</a>
             </nav>
 
-            {{-- ログアウト --}}
-            <a href="/logout" class="text-sm hover:opacity-80">ログアウト</a>
-
+          {{-- 
+<form method="POST" action="{{ route('logout') }}">
+    @csrf
+    <button type="submit">ログアウト</button>
+</form>
+--}}
         </div>
     </header>
 
 
     {{-- ====== メインコンテンツ ====== --}}
-    <main class="max-w-7xl mx-auto py-12 px-6">
-        @yield('content')
-    </main>
+  <main class="max-w-7xl mx-auto py-12 px-6 flex-grow">
+    @yield('content')
+</main>
+
 
 
     {{-- ====== フッター ====== --}}
