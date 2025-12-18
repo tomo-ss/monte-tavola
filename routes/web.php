@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+
 // ===============================
 // TOP
 // ===============================
@@ -100,7 +101,22 @@ Route::middleware('auth')->prefix('admin')->group(function () {
     })->name('admin.index');
 });
 
+// ===============================
+// 管理側：予約管理（Reservation / Admin）
+// ===============================
+use App\Http\Controllers\Admin\ReservationController as AdminReservationController;
 
+
+Route::middleware('auth')
+    ->prefix('admin')
+    ->group(function () {
+        Route::get('/reservation', [AdminReservationController::class, 'index'])
+            ->name('admin.reservation.index');
+    });
+ Route::post(
+    '/reservation/{id}/toggle-status',
+    [AdminReservationController::class, 'toggleStatus']
+)->name('admin.reservation.toggle');
 
 
 
