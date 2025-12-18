@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-
 // ===============================
 // TOP
 // ===============================
@@ -18,13 +17,13 @@ Route::get('/', [TopController::class, 'index'])
 // ===============================
 
 // メニュー：フード
-Route::get('/menu/food', fn() => view('menu.food'));
+Route::get('/menu/food', fn () => view('menu.food'));
 
 // メニュー：ドリンク
-Route::get('/menu/drink', fn() => view('menu.drink'));
+Route::get('/menu/drink', fn () => view('menu.drink'));
 
 // メニュー：季節限定
-Route::get('/menu/seasonal', fn() => view('menu.seasonal'));
+Route::get('/menu/seasonal', fn () => view('menu.seasonal'));
 
 
 // ===============================
@@ -32,7 +31,7 @@ Route::get('/menu/seasonal', fn() => view('menu.seasonal'));
 // ===============================
 
 // アクセス情報表示
-Route::get('/access', fn() => view('access'));
+Route::get('/access', fn () => view('access'));
 
 
 // ===============================
@@ -57,24 +56,22 @@ Route::get('/reservation/complete', [ReservationController::class, 'complete'])
     ->name('reservation.complete');
 
 
-
 // ===============================
 // お問い合わせ（Contact / ユーザー側）
 // ===============================
 use App\Http\Controllers\ContactController;
 
-// 新規作成 → フォーム表示
+// フォーム表示
 Route::get('/contact', [ContactController::class, 'form'])
     ->name('contact.form');
 
-// 新規作成 → 確認画面
+// 確認画面
 Route::post('/contact/confirm', [ContactController::class, 'confirm'])
     ->name('contact.confirm');
 
-// 新規作成 → 完了画面
+// 完了画面
 Route::post('/contact/complete', [ContactController::class, 'complete'])
     ->name('contact.complete');
-
 
 
 // ===============================
@@ -91,34 +88,41 @@ Route::get('/news/{id}', [UserNewsController::class, 'show'])
     ->name('news.show');
 
 
+// ===============================
+// 管理側：TOP（Admin）
+// ===============================
+Route::prefix('admin')->group(function () {
 
-// ===============================
-// 管理側：TOP（News / Admin）
-// ===============================
-Route::middleware('auth')->prefix('admin')->group(function () {
     Route::get('/', function () {
         return view('admin.index');
     })->name('admin.index');
+
 });
+
 
 // ===============================
 // 管理側：予約管理（Reservation / Admin）
 // ===============================
 use App\Http\Controllers\Admin\ReservationController as AdminReservationController;
 
+Route::prefix('admin')->group(function () {
+    // CSV出力
+    Route::get(
+    '/admin/reservation/csv',
+    [AdminReservationController::class, 'exportCsv']
+    )->name('admin.reservation.csv');
 
-Route::middleware('auth')
-    ->prefix('admin')
-    ->group(function () {
-        Route::get('/reservation', [AdminReservationController::class, 'index'])
-            ->name('admin.reservation.index');
-    });
- Route::post(
-    '/reservation/{id}/toggle-status',
-    [AdminReservationController::class, 'toggleStatus']
-)->name('admin.reservation.toggle');
+    // 一覧
+    Route::get('/reservation', [AdminReservationController::class, 'index'])
+        ->name('admin.reservation.index');
 
+    // ステータス切り替え
+    Route::post(
+        '/reservation/{id}/toggle-status',
+        [AdminReservationController::class, 'toggleStatus']
+    )->name('admin.reservation.toggle');
 
+});
 
 
 // ===============================
@@ -159,13 +163,17 @@ Route::prefix('admin')->group(function () {
     // 削除処理
     Route::post('/news/{id}/delete', [NewsController::class, 'delete'])
         ->name('admin.news.delete');
+
 });
 
-//後で消す仮ログイン
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
-Route::get('/test-login', function () {
-    Auth::login(User::first());
-    return redirect('/admin');
-});
+// ===============================
+// 仮ログイン（必要になったら使う・今は未使用）
+// ===============================
+// use Illuminate\Support\Facades\Auth;
+// use App\Models\User;
+
+// Route::get('/test-login', function () {
+//     Auth::login(User::first());
+//     return redirect('/admin');
+// });
