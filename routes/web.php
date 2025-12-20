@@ -3,11 +3,18 @@
 use Illuminate\Support\Facades\Route;
 
 // ===============================
-// TOP
+// Controller imports（※必ず先頭）
 // ===============================
 use App\Http\Controllers\TopController;
+use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\NewsController as UserNewsController;
+use App\Http\Controllers\Admin\ReservationController as AdminReservationController;
+use App\Http\Controllers\Admin\NewsController;
 
-// TOPページ表示
+// ===============================
+// TOP
+// ===============================
 Route::get('/', [TopController::class, 'index'])
     ->name('top');
 
@@ -29,15 +36,12 @@ Route::get('/menu/seasonal', fn () => view('menu.seasonal'));
 // ===============================
 // Access
 // ===============================
-
-// アクセス情報表示
 Route::get('/access', fn () => view('access'));
 
 
 // ===============================
 // 予約フォーム（Reservation / ユーザー側）
 // ===============================
-use App\Http\Controllers\ReservationController;
 
 // 新規作成 → フォーム表示
 Route::get('/reservation', [ReservationController::class, 'create'])
@@ -59,7 +63,6 @@ Route::get('/reservation/complete', [ReservationController::class, 'complete'])
 // ===============================
 // お問い合わせ（Contact / ユーザー側）
 // ===============================
-use App\Http\Controllers\ContactController;
 
 // フォーム表示
 Route::get('/contact', [ContactController::class, 'form'])
@@ -77,7 +80,6 @@ Route::post('/contact/complete', [ContactController::class, 'complete'])
 // ===============================
 // ユーザー側：お知らせ（News / Public）
 // ===============================
-use App\Http\Controllers\NewsController as UserNewsController;
 
 // 一覧表示
 Route::get('/news', [UserNewsController::class, 'index'])
@@ -103,14 +105,11 @@ Route::prefix('admin')->group(function () {
 // ===============================
 // 管理側：予約管理（Reservation / Admin）
 // ===============================
-use App\Http\Controllers\Admin\ReservationController as AdminReservationController;
-
 Route::prefix('admin')->group(function () {
+
     // CSV出力
-    Route::get(
-    '/admin/reservation/csv',
-    [AdminReservationController::class, 'exportCsv']
-    )->name('admin.reservation.csv');
+    Route::get('/reservation/csv', [AdminReservationController::class, 'exportCsv'])
+        ->name('admin.reservation.csv');
 
     // 一覧
     Route::get('/reservation', [AdminReservationController::class, 'index'])
@@ -122,14 +121,18 @@ Route::prefix('admin')->group(function () {
         [AdminReservationController::class, 'toggleStatus']
     )->name('admin.reservation.toggle');
 
+    // 削除
+    Route::delete(
+        '/reservations/{reservation}',
+        [AdminReservationController::class, 'destroy']
+    )->name('admin.reservation.destroy');
+
 });
 
 
 // ===============================
 // 管理側：お知らせ（News / Admin）
 // ===============================
-use App\Http\Controllers\Admin\NewsController;
-
 Route::prefix('admin')->group(function () {
 
     // 一覧表示
@@ -168,11 +171,11 @@ Route::prefix('admin')->group(function () {
 
 
 // ===============================
-// 仮ログイン（必要になったら使う・今は未使用）
+// 仮ログイン（未使用）
 // ===============================
 // use Illuminate\Support\Facades\Auth;
 // use App\Models\User;
-
+//
 // Route::get('/test-login', function () {
 //     Auth::login(User::first());
 //     return redirect('/admin');

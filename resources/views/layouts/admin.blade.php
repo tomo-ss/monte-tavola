@@ -46,6 +46,8 @@
         © Monte Tavola 業務管理システム
     </footer>
 
+    {{-- Alpine.js --}}
+    <script src="https://unpkg.com/alpinejs" defer></script>
 
 </body>
 </html>

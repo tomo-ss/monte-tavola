@@ -122,4 +122,22 @@ class ReservationController extends Controller
         return redirect()
             ->route('admin.reservation.index');
     }
+
+    
+    /**
+     * 削除モーダル
+     */
+public function destroy(Reservation $reservation)
+{
+    $reservation->delete();
+
+    return redirect()
+        ->route('admin.reservation.index')
+        ->with('success', '予約を削除しました。');
+}
+
+
+
+
+
 }
