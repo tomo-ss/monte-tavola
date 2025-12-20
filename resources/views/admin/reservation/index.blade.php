@@ -4,14 +4,21 @@
 <div
     class="max-w-7xl mx-auto"
     x-data="{
-        open: false,
-        reservation: {
-            id: null,
-            name: '',
-            datetime: '',
-            people: ''
-        }
-    }"
+    deleteOpen: false,
+    detailOpen: false,
+    reservation: {
+        id: null,
+        name: '',
+        name_kana: '',
+        phone: '',
+        email: '',
+        date: '',
+        time: '',
+        people: '',
+        note: ''
+    }
+}"
+
 >
 
 
@@ -127,13 +134,29 @@
                             <td class="border p-2">
                                 <div class="flex justify-center gap-2">
 
-                                    {{-- 詳細（未実装でもOK） --}}
+                                    {{-- 詳細 --}}
                                     <button
                                         type="button"
-                                        class="bg-[#22314C] text-white px-3 py-1 rounded opacity-50 cursor-not-allowed"
+                                        @click="
+                                            detailOpen = true;
+                                            reservation = @js([
+                                                'id' => $reservation->id,
+                                                'name' => $reservation->name,
+                                                'name_kana' => $reservation->name_kana,
+                                                'phone' => $reservation->phone,
+                                                'email' => $reservation->email,
+                                                'date' => $reservation->date,
+                                                'time' => \Carbon\Carbon::parse($reservation->time)->format('H:i'),
+                                                'people' => $reservation->people_count . '名',
+                                                'note' => $reservation->note ?? 'なし',
+                                            ])
+                                        "
+                                        class="bg-[#22314C] text-white px-3 py-1 rounded"
                                     >
                                         詳細
                                     </button>
+
+
 
                                     {{-- ステータス切り替え --}}
                                     <form
@@ -163,14 +186,15 @@
                                  <button
                                     type="button"
                                     @click="
-                                        open = true;
-                                        reservation = {
-                                            id: {{ $reservation->id }},
-                                            name: '{{ $reservation->name }}',
-                                            datetime: '{{ $reservation->date }} {{ \Carbon\Carbon::parse($reservation->time)->format('H:i') }}',
-                                            people: '{{ $reservation->people_count }}名'
-                                        }
-                                    "
+                                    deleteOpen = true;
+                                    reservation = {
+                                        id: {{ $reservation->id }},
+                                        name: '{{ $reservation->name }}',
+                                        datetime: '{{ $reservation->date }} {{ \Carbon\Carbon::parse($reservation->time)->format('H:i') }}',
+                                        people: '{{ $reservation->people_count }}名'
+                                    }
+                                "
+
                                     class="bg-red-600 text-white px-3 py-1 rounded"
                                 >
                                     削除
@@ -185,14 +209,88 @@
             </table>
         @endif
     </div>
-        {{-- 削除確認モーダル --}}
-        
-        <div
-            x-show="open"
-            x-cloak
-            x-transition
-            class="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
-        >
+       {{-- 予約詳細モーダル --}}
+<div
+    x-show="detailOpen"
+    x-cloak
+    x-transition
+    @click.self="detailOpen = false"
+    @keydown.escape.window="detailOpen = false"
+    class="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+>
+    <div class="bg-white w-full max-w-2xl rounded-xl px-12 py-10">
+
+        {{-- タイトル --}}
+        <h2 class="text-lg font-semibold border-b pb-3 mb-8">
+            予約詳細
+        </h2>
+
+        {{-- お客様情報 --}}
+        <div class="mb-10 flex justify-center">
+            <div class="w-[440px] pl-6">
+                <p class="font-semibold mb-3">■ お客様情報</p>
+
+                <div class="grid grid-cols-[6rem_1rem_auto] gap-y-2 text-sm">
+                    <div>氏名</div><div>：</div><div x-text="reservation.name"></div>
+                    <div>フリガナ</div><div>：</div><div x-text="reservation.name_kana"></div>
+                    <div>電話番号</div><div>：</div><div x-text="reservation.phone"></div>
+                    <div>メール</div><div>：</div><div x-text="reservation.email"></div>
+                </div>
+            </div>
+        </div>
+
+        {{-- ご来店日時 --}}
+        <div class="mb-10 flex justify-center">
+            <div class="w-[440px] pl-6">
+                <p class="font-semibold mb-3">■ ご来店日時</p>
+
+                <div class="grid grid-cols-[6rem_1rem_auto] gap-y-2 text-sm">
+                    <div>来店日</div><div>：</div><div x-text="reservation.date"></div>
+                    <div>来店時間</div><div>：</div><div x-text="reservation.time"></div>
+                    <div>人数</div><div>：</div><div x-text="reservation.people"></div>
+                </div>
+            </div>
+        </div>
+
+        {{-- ご要望 --}}
+        <div class="mb-12 flex justify-center">
+            <div class="w-[440px] pl-6">
+                <p class="font-semibold mb-3">■ ご要望など</p>
+
+                <p
+                    class="text-sm whitespace-pre-wrap leading-relaxed break-words"
+                    x-text="reservation.note"
+                ></p>
+            </div>
+        </div>
+
+        {{-- ボタン --}}
+        <div class="flex justify-center">
+            <button
+                type="button"
+                @click="detailOpen = false"
+                class="px-8 py-2 border border-[#22314C] rounded text-[#22314C]"
+            >
+                閉じる
+            </button>
+        </div>
+
+    </div>
+</div>
+
+
+
+            {{-- 削除確認モーダル --}}
+            
+            <div
+                x-show="deleteOpen"
+                x-cloak
+                x-transition
+                @click.self="deleteOpen = false"
+                @keydown.escape.window="deleteOpen = false"
+                class="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+            >
+
             <div class="bg-white w-full max-w-lg rounded-xl px-10 py-8">
 
                 {{-- タイトル --}}
@@ -231,7 +329,7 @@
                 <div class="flex justify-center gap-6 pt-2">
                     <button
                         type="button"
-                        @click="open = false"
+                        @click="deleteOpen = false"
                         class="px-6 py-2 border border-[#22314C] rounded text-[#22314C]"
                     >
                         閉じる
