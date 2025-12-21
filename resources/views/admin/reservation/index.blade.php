@@ -24,6 +24,14 @@
 
     <h1 class="text-xl font-semibold mb-6">予約管理</h1>
 
+    {{-- 削除成功メッセージ --}}
+@if (session('success'))
+    <div class="mb-6 rounded border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+        {{ session('success') }}
+    </div>
+@endif
+
+
     {{-- 検索フォーム --}}
     <form
         method="GET"

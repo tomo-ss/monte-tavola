@@ -138,6 +138,4 @@ public function destroy(Reservation $reservation)
 
 
 
-
-
 }
