@@ -9,12 +9,34 @@ use App\Models\News;
 class NewsController extends Controller
 {
     /**
-     * 一覧（まだ未作成なので空でOK）
+     * 一覧・検索
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.news.index');
+        $query = News::query();
+
+        // タイトル検索
+        if ($request->filled('title')) {
+            $query->where('title', 'like', '%' . $request->title . '%');
+        }
+
+        // キーワード検索（本文）
+        if ($request->filled('keyword')) {
+            $query->where('body', 'like', '%' . $request->keyword . '%');
+        }
+
+        // 公開日
+        if ($request->filled('published_at')) {
+            $query->whereDate('published_at', $request->published_at);
+        }
+
+        $newsList = $query
+            ->orderBy('published_at', 'desc')
+            ->get();
+
+        return view('admin.news.index', compact('newsList'));
     }
+
 
     /**
      * 新規作成フォーム表示

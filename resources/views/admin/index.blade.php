@@ -20,7 +20,8 @@
         </a>
 
         {{-- お知らせ管理 --}}
-        <a href="#" class="bg-white rounded-2xl p-10 hover:shadow-md transition">
+        <a
+            href="{{ route('admin.news.index') }}" class="bg-white rounded-2xl p-10 hover:shadow-md transition">
             <img
                 src="{{ asset('images/admin/icon-news.png') }}"
                 alt="お知らせ管理"
@@ -28,6 +29,7 @@
             >
             <p class="text-lg font-medium">お知らせ管理</p>
         </a>
+
 
         {{-- 休業日管理 --}}
         <a href="#" class="bg-white rounded-2xl p-10 hover:shadow-md transition">
