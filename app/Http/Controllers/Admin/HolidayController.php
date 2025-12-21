@@ -14,7 +14,6 @@ class HolidayController extends Controller
     public function index()
     {
         $holidays = Holiday::orderBy('date', 'desc')->get();
-
         return view('admin.holiday.index', compact('holidays'));
     }
 
@@ -42,5 +41,35 @@ class HolidayController extends Controller
         return redirect()
             ->route('admin.holiday.index')
             ->with('success', '休業日を登録しました。');
+    } 
+
+    /**
+     * 更新処理
+     */
+    public function update(Request $request, Holiday $holiday)
+    {
+        $validated = $request->validate([
+            'date' => 'required|date|unique:holidays,date,' . $holiday->id,
+            'type' => 'required|string|max:20',
+            'note' => 'nullable|string',
+        ]);
+
+        $holiday->update($validated);
+
+        return redirect()
+            ->route('admin.holiday.index')
+            ->with('success', '休業日を更新しました。');
+    }
+
+    /**
+     * 削除処理
+     */
+    public function destroy(Holiday $holiday)
+    {
+        $holiday->delete();
+
+        return redirect()
+            ->route('admin.holiday.index')
+            ->with('success', '休業日を削除しました。');
     }
 }

@@ -182,8 +182,12 @@ Route::prefix('admin')->group(function () {
     Route::post('/holiday/store', [HolidayController::class, 'store'])
         ->name('admin.holiday.store');
 
-});
+    Route::post('/holiday/{holiday}/update', [HolidayController::class, 'update'])
+        ->name('admin.holiday.update');
 
+    Route::post('/holiday/{holiday}/delete', [HolidayController::class, 'destroy'])
+        ->name('admin.holiday.delete');
+});
 
 
 
