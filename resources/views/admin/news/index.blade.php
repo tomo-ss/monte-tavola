@@ -17,6 +17,14 @@
 
     <h1 class="text-xl font-semibold mb-16">お知らせ管理</h1>
 
+    {{-- 成功メッセージ --}}
+    @if (session('success'))
+        <div class="mb-10 rounded border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+            {{ session('success') }}
+        </div>
+    @endif
+
+
     {{-- 新規投稿 --}}
     <div class="flex justify-center mb-24">
         <a
