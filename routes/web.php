@@ -12,6 +12,7 @@ use App\Http\Controllers\NewsController as UserNewsController;
 use App\Http\Controllers\Admin\ReservationController as AdminReservationController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\HolidayController;
+use App\Models\Holiday;
 
 
 // ===============================
@@ -61,6 +62,19 @@ Route::post('/reservation/store', [ReservationController::class, 'store'])
 Route::get('/reservation/complete', [ReservationController::class, 'complete'])
     ->name('reservation.complete');
 
+
+// ===============================
+// API：休業日取得（予約フォーム用）
+// ===============================
+Route::get('/api/holidays', function () {
+    return Holiday::orderBy('date')
+        ->pluck('date')
+        ->values();
+});
+
+
+
+    
 
 // ===============================
 // お問い合わせ（Contact / ユーザー側）

@@ -53,12 +53,38 @@
                                 必須
                             </span>
                         </div>
-                        <div>
-                            <input type="date" name="date" id="date" value="{{ old('date') }}"
-                                   class="w-full h-11 rounded-lg border border-[#363427]/20 bg-white px-4 text-sm text-[#363427]
-                                          focus:outline-none focus:ring-2 focus:ring-[#363427]/20 focus:border-[#363427]/40">
-                        </div>
-                    </div>
+
+                {{-- input + icon を包む --}}
+                <div class="relative">
+                    <input
+                        type="text"
+                        name="date"
+                        id="reservation_date"
+                        value="{{ old('date') }}"
+                        placeholder="選択してください"
+                        class="w-full h-11 rounded-lg border border-[#363427]/20 bg-white px-4 pr-10 text-sm
+                            text-[#363427] placeholder:text-[#363427]
+                            focus:outline-none focus:ring-2 focus:ring-[#363427]/20 focus:border-[#363427]/40"
+                    />
+
+                    {{-- カレンダーアイコン（SVG・単色） --}}
+                    <svg
+                        class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[#363427]/60"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M8 7V3m8 4V3m-11 8h14M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                        />
+                    </svg>
+                </div>
+                </div>
+
 
                     {{-- 来店時間 --}}
                     <div class="grid grid-cols-1 md:grid-cols-[140px_80px_1fr] items-center gap-3 md:gap-6 py-3">
@@ -78,22 +104,22 @@
                                 : collect();
                         @endphp
 
-    <select name="time" id="time" disabled
-    class="w-full h-11 rounded-lg border border-[#363427]/20 bg-white px-4 text-sm text-[#363427]
-        focus:outline-none focus:ring-2 focus:ring-[#363427]/20 focus:border-[#363427]/40">
-    <option value="">選択してください</option>
+                        <select name="time" id="time" disabled
+                        class="w-full h-11 rounded-lg border border-[#363427]/20 bg-white px-4 text-sm text-[#363427]
+                            focus:outline-none focus:ring-2 focus:ring-[#363427]/20 focus:border-[#363427]/40">
+                        <option value="">選択してください</option>
 
-    @php
-        $start = \Carbon\Carbon::createFromFormat('H:i', '11:00');
-        $end   = \Carbon\Carbon::createFromFormat('H:i', '16:00');
-    @endphp
+                        @php
+                            $start = \Carbon\Carbon::createFromFormat('H:i', '11:00');
+                            $end   = \Carbon\Carbon::createFromFormat('H:i', '16:00');
+                        @endphp
 
-    @for ($t = $start->copy(); $t->lte($end); $t->addMinutes(30))
-        <option value="{{ $t->format('H:i') }}">
-            {{ $t->format('H:i') }}
-        </option>
-    @endfor
-</select>
+                        @for ($t = $start->copy(); $t->lte($end); $t->addMinutes(30))
+                            <option value="{{ $t->format('H:i') }}">
+                                {{ $t->format('H:i') }}
+                            </option>
+                        @endfor
+                    </select>
 
 
                     {{-- 人数 --}}
@@ -233,27 +259,8 @@
 </div>
 
 <script>
-    const reservedTimes = @json($reservedTimes);
-
-    const dateInput = document.getElementById('date');
-    const timeSelect = document.getElementById('time');
-
-    dateInput.addEventListener('change', () => {
-        timeSelect.disabled = false;
-
-        const date = dateInput.value;
-        const reserved = reservedTimes[date] ?? [];
-
-        [...timeSelect.options].forEach(option => {
-            if (!option.value) return;
-            option.disabled = reserved.includes(option.value);
-        });
-    });
-
-    // エラーで戻ってきた場合も自動反映
-if (dateInput.value) {
-    dateInput.dispatchEvent(new Event('change'));
-}
-
+  window.reservedTimes = @json($reservedTimes);
 </script>
+
+
 @endsection

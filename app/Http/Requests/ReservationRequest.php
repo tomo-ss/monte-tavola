@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Reservation;
+use App\Models\Holiday;
 
 class ReservationRequest extends FormRequest
 {
@@ -27,11 +28,12 @@ class ReservationRequest extends FormRequest
     }
 
     /**
-     * 重複予約チェック
+     * 追加バリデーション
      */
     public function withValidator($validator)
     {
         $validator->after(function ($validator) {
+
             $date = $this->input('date');
             $time = $this->input('time');
 
@@ -39,6 +41,9 @@ class ReservationRequest extends FormRequest
                 return;
             }
 
+            /**
+             * ① 重複予約チェック
+             */
             $exists = Reservation::where('date', $date)
                 ->where('time', $time)
                 ->where('status', '!=', 'キャンセル')
@@ -48,6 +53,16 @@ class ReservationRequest extends FormRequest
                 $validator->errors()->add(
                     'time',
                     'この日時はすでに予約が入っています。別の日時を選択してください。'
+                );
+            }
+
+            /**
+             * ② 休業日チェック
+             */
+            if (Holiday::where('date', $date)->exists()) {
+                $validator->errors()->add(
+                    'date',
+                    '選択された日は休業日のため予約できません。'
                 );
             }
         });

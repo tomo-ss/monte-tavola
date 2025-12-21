@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ReservationRequest;
 use App\Models\Reservation;
+use App\Models\Holiday;
 
 class ReservationController extends Controller
 {
@@ -21,6 +22,9 @@ class ReservationController extends Controller
                     return \Carbon\Carbon::parse($time)->format('H:i');
                 });
             });
+        
+        // 休業日（dateだけ取得）
+        $holidays = Holiday::pluck('date')->toArray();
 
 
         return view('reservation.reservation', compact('reservedTimes'));
