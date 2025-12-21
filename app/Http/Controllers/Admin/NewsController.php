@@ -37,6 +37,57 @@ class NewsController extends Controller
         return view('admin.news.index', compact('newsList'));
     }
 
+    /**
+     * 編集（データ取得）
+     */
+    public function edit($id)
+    {
+        $news = News::findOrFail($id);
+
+        return view('admin.news.edit', compact('news'));
+    }
+
+    /**
+     * 更新処理
+     */
+    public function update(Request $request, $id)
+    {
+        $news = News::findOrFail($id);
+
+        // バリデーション
+        $validated = $request->validate([
+            'title'        => 'required|max:255',
+            'body'         => 'nullable',
+            'published_at' => 'required|date',
+            'image'        => 'nullable|image',
+        ]);
+
+        // 画像差し替え対応（あれば）
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('news', 'public');
+            $validated['image_path'] = $imagePath;
+        }
+
+        $news->update($validated);
+
+        return redirect()
+            ->route('admin.news.index')
+            ->with('success', 'お知らせを更新しました。');
+    }
+
+    /**
+     * 削除処理
+     */
+    public function delete($id)
+    {
+        $news = News::findOrFail($id);
+        $news->delete();
+
+        return redirect()
+            ->route('admin.news.index')
+            ->with('success', 'お知らせを削除しました。');
+    }
+
 
     /**
      * 新規作成フォーム表示

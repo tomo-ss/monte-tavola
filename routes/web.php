@@ -152,7 +152,18 @@ Route::prefix('admin')->group(function () {
     Route::get('/news/complete', [NewsController::class, 'complete'])
         ->name('admin.news.complete');
 
-    // ※ 編集・削除は後で追加
+    // 編集フォーム
+    Route::get('/news/{id}/edit', [NewsController::class, 'edit'])
+        ->name('admin.news.edit');
+
+    // 更新処理
+    Route::post('/news/{id}/update', [NewsController::class, 'update'])
+        ->name('admin.news.update');
+
+    // 削除
+    Route::post('/news/{id}/delete', [NewsController::class, 'delete'])
+        ->name('admin.news.delete');
+
 });
 
 
