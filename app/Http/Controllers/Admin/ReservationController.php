@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class ReservationController extends Controller
 {
@@ -16,28 +15,18 @@ class ReservationController extends Controller
     {
         $query = Reservation::query();
 
-        // ===============================
-        // 検索条件
-        // ===============================
-
-        // 来店日
         if ($request->filled('date')) {
             $query->where('date', $request->date);
         }
 
-        // 氏名（部分一致）
         if ($request->filled('name')) {
             $query->where('name', 'like', '%' . $request->name . '%');
         }
 
-        // ステータス
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
 
-        // ===============================
-        // 並び順
-        // ===============================
         $reservations = $query
             ->orderBy('date', 'desc')
             ->orderBy('time', 'desc')
@@ -47,13 +36,12 @@ class ReservationController extends Controller
     }
 
     /**
-     * CSV出力（検索条件を反映）
+     * CSV出力
      */
     public function exportCsv(Request $request)
     {
         $query = Reservation::query();
 
-        // 検索条件（indexと同じ）
         if ($request->filled('date')) {
             $query->where('date', $request->date);
         }
@@ -71,10 +59,12 @@ class ReservationController extends Controller
             ->orderBy('time', 'desc')
             ->get();
 
-     return response()->streamDownload(function () use ($reservations) {
-        $handle = fopen('php://output', 'w');
+        return response()->streamDownload(function () use ($reservations) {
+            $handle = fopen('php://output', 'w');
 
-            // ヘッダー行
+            // ★ Excel文字化け対策（UTF-8 BOM）
+            fwrite($handle, "\xEF\xBB\xBF");
+
             fputcsv($handle, [
                 'ID',
                 '氏名',
@@ -85,7 +75,6 @@ class ReservationController extends Controller
                 'ステータス',
             ]);
 
-            // データ行
             foreach ($reservations as $reservation) {
                 fputcsv($handle, [
                     $reservation->id,
@@ -99,16 +88,13 @@ class ReservationController extends Controller
             }
 
             fclose($handle);
-        });
-
-        return $response->withHeaders([
+        }, 'reservations.csv', [
             'Content-Type' => 'text/csv; charset=UTF-8',
-            'Content-Disposition' => 'attachment; filename="reservations.csv"',
         ]);
     }
 
     /**
-     * ステータス切り替え（未確認 ⇔ 確認済）
+     * ステータス切り替え
      */
     public function toggleStatus($id)
     {
@@ -119,23 +105,18 @@ class ReservationController extends Controller
 
         $reservation->save();
 
-        return redirect()
-            ->route('admin.reservation.index');
+        return redirect()->route('admin.reservation.index');
     }
 
-    
     /**
-     * 削除モーダル
+     * 予約削除
      */
-public function destroy(Reservation $reservation)
-{
-    $reservation->delete();
+    public function destroy(Reservation $reservation)
+    {
+        $reservation->delete();
 
-    return redirect()
-        ->route('admin.reservation.index')
-        ->with('success', '予約を削除しました。');
-}
-
-
-
+        return redirect()
+            ->route('admin.reservation.index')
+            ->with('success', '予約を削除しました。');
+    }
 }

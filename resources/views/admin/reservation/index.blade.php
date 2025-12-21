@@ -82,7 +82,7 @@
                 検索する
             </button>
 
-            {{-- CSVは次ステップ用（今はダミーOK） --}}
+            {{-- CSV出力 --}}
                 <a
             href="{{ route('admin.reservation.csv', request()->query()) }}"
             class="bg-[#22314C] text-white px-6 py-2 rounded"
