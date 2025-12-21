@@ -32,7 +32,7 @@
 
 
         {{-- 休業日管理 --}}
-        <a href="#" class="bg-white rounded-2xl p-10 hover:shadow-md transition">
+        <a href="{{ route('admin.holiday.index') }}" class="bg-white rounded-2xl p-10 hover:shadow-md transition">
             <img
                 src="{{ asset('images/admin/icon-holiday.png') }}"
                 alt="休業日管理"

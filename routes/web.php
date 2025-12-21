@@ -11,6 +11,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\NewsController as UserNewsController;
 use App\Http\Controllers\Admin\ReservationController as AdminReservationController;
 use App\Http\Controllers\Admin\NewsController;
+use App\Http\Controllers\Admin\HolidayController;
+
 
 // ===============================
 // TOP
@@ -165,6 +167,23 @@ Route::prefix('admin')->group(function () {
         ->name('admin.news.delete');
 
 });
+
+// ===============================
+// 管理側：休業日設定（Holiday / Admin）
+// ===============================
+Route::prefix('admin')->group(function () {
+
+    Route::get('/holiday', [HolidayController::class, 'index'])
+        ->name('admin.holiday.index');
+
+    Route::get('/holiday/create', [HolidayController::class, 'create'])
+        ->name('admin.holiday.create');
+
+    Route::post('/holiday/store', [HolidayController::class, 'store'])
+        ->name('admin.holiday.store');
+
+});
+
 
 
 
