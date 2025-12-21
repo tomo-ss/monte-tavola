@@ -1,7 +1,20 @@
 @extends('layouts.admin')
 
 @section('content')
-<div class="max-w-7xl mx-auto">
+    <div
+        class="max-w-7xl mx-auto"
+        x-data="{
+            detailOpen: false,
+            contact: {
+                id: null,
+                name: '',
+                email: '',
+                subject: '',
+                message: '',
+                created_at: ''
+            }
+        }"
+    >
 
     <h1 class="text-xl font-semibold mb-6">お問い合わせ管理</h1>
 
@@ -59,12 +72,23 @@
                                 <div class="flex justify-center gap-2">
 
                                     {{-- 詳細 --}}
-                                    <a
-                                        href="{{ route('admin.contacts.show', $contact) }}"
+                                    <button
+                                        type="button"
+                                        @click="
+                                            detailOpen = true;
+                                            contact = @js([
+                                                'id' => $contact->id,
+                                                'name' => $contact->name,
+                                                'email' => $contact->email,
+                                                'subject' => $contact->subject,
+                                                'message' => $contact->message,
+                                                'created_at' => $contact->created_at->format('Y-m-d H:i'),
+                                            ])
+                                        "
                                         class="bg-[#22314C] text-white px-3 py-1 rounded"
                                     >
                                         詳細
-                                    </a>
+                                    </button>
 
                                     {{-- ステータス切替 --}}
                                     <form
@@ -118,6 +142,60 @@
             </table>
         @endif
     </div>
+    {{-- お問い合わせ詳細モーダル --}}
+<div
+    x-show="detailOpen"
+    x-cloak
+    x-transition
+    @click.self="detailOpen = false"
+    @keydown.escape.window="detailOpen = false"
+    class="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+>
+    <div class="bg-white w-full max-w-2xl rounded-xl px-12 py-10">
 
+        {{-- タイトル --}}
+        <h2 class="text-lg font-semibold border-b pb-3 mb-8">
+            お問い合わせ詳細
+        </h2>
+
+        {{-- 基本情報 --}}
+        <div class="mb-10 flex justify-center">
+            <div class="w-[440px] pl-6">
+                <p class="font-semibold mb-3">■ 基本情報</p>
+
+                <div class="grid grid-cols-[6rem_1rem_auto] gap-y-2 text-sm">
+                    <div>氏名</div><div>：</div><div x-text="contact.name"></div>
+                    <div>メール</div><div>：</div><div x-text="contact.email"></div>
+                    <div>件名</div><div>：</div><div x-text="contact.subject"></div>
+                    <div>受信日時</div><div>：</div><div x-text="contact.created_at"></div>
+                </div>
+            </div>
+        </div>
+
+        {{-- お問い合わせ内容 --}}
+        <div class="mb-12 flex justify-center">
+            <div class="w-[440px] pl-6">
+                <p class="font-semibold mb-3">■ お問い合わせ内容</p>
+
+                <p
+                    class="text-sm whitespace-pre-wrap leading-relaxed break-words"
+                    x-text="contact.message"
+                ></p>
+            </div>
+        </div>
+
+        {{-- ボタン --}}
+        <div class="flex justify-center">
+            <button
+                type="button"
+                @click="detailOpen = false"
+                class="px-8 py-2 border border-[#22314C] rounded text-[#22314C]"
+            >
+                閉じる
+            </button>
+        </div>
+
+    </div>
+</div>
 </div>
 @endsection

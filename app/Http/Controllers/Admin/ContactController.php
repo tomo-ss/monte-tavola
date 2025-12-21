@@ -19,14 +19,6 @@ class ContactController extends Controller
     }
 
     /**
-     * お問い合わせ詳細
-     */
-    public function show(Contact $contact)
-    {
-        return view('admin.contacts.show', compact('contact'));
-    }
-
-    /**
      * ステータス更新（未対応 ↔ 対応済）
      */
     public function updateStatus(Request $request, Contact $contact)
@@ -36,7 +28,20 @@ class ContactController extends Controller
         ]);
 
         return redirect()
-            ->route('admin.contacts.show', $contact)
+            ->route('admin.contacts.index')
             ->with('success', 'ステータスを更新しました。');
     }
+
+    /**
+     * 削除
+     */
+    public function destroy(Contact $contact)
+    {
+        $contact->delete();
+
+        return redirect()
+            ->route('admin.contacts.index')
+            ->with('success', 'お問い合わせを削除しました。');
+    }
 }
+
