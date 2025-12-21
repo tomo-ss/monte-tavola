@@ -42,7 +42,7 @@
         </a>
 
         {{-- お問い合わせ管理 --}}
-        <a href="#" class="bg-white rounded-2xl p-10 hover:shadow-md transition">
+        <a href="{{ route('admin.contacts.index') }}" class="bg-white rounded-2xl p-10 hover:shadow-md transition">
             <img
                 src="{{ asset('images/admin/icon-contact.png') }}"
                 alt="お問い合わせ管理"
