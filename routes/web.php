@@ -117,31 +117,30 @@ Route::prefix('admin')->group(function () {
 
 });
 
-
 // ===============================
 // 管理側：予約管理（Reservation / Admin）
 // ===============================
-Route::prefix('admin')->group(function () {
-
-    // CSV出力
-    Route::get('/reservation/csv', [AdminReservationController::class, 'exportCsv'])
-        ->name('admin.reservation.csv');
+Route::prefix('admin')->name('admin.')->group(function () {
 
     // 一覧
     Route::get('/reservation', [AdminReservationController::class, 'index'])
-        ->name('admin.reservation.index');
+        ->name('reservation.index');
 
-    // ステータス切り替え
-    Route::post(
-        '/reservation/{id}/toggle-status',
-        [AdminReservationController::class, 'toggleStatus']
-    )->name('admin.reservation.toggle');
+    // CSV出力
+    Route::get('/reservation/csv', [AdminReservationController::class, 'exportCsv'])
+        ->name('reservation.csv');
+
+    // ステータス更新
+    Route::patch(
+        '/reservation/{reservation}/status',
+        [AdminReservationController::class, 'updateStatus']
+    )->name('reservation.updateStatus');
 
     // 削除
     Route::delete(
-        '/reservations/{reservation}',
+        '/reservation/{reservation}',
         [AdminReservationController::class, 'destroy']
-    )->name('admin.reservation.destroy');
+    )->name('reservation.destroy');
 
 });
 

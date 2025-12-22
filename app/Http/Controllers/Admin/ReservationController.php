@@ -94,18 +94,21 @@ class ReservationController extends Controller
     }
 
     /**
-     * ステータス切り替え
+     * ステータス更新（未確認 ↔ 確認済）
      */
-    public function toggleStatus($id)
+    public function updateStatus(Request $request, Reservation $reservation)
     {
-        $reservation = Reservation::findOrFail($id);
+        $request->validate([
+            'status' => ['required', 'in:未確認,確認済'],
+        ]);
 
-        $reservation->status =
-            $reservation->status === '確認済' ? '未確認' : '確認済';
+        $reservation->update([
+            'status' => $request->status,
+        ]);
 
-        $reservation->save();
-
-        return redirect()->route('admin.reservation.index');
+        return redirect()
+            ->route('admin.reservation.index')
+            ->with('success', 'ステータスを更新しました。');
     }
 
     /**

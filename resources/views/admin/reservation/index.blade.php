@@ -167,28 +167,26 @@
 
 
                                     {{-- ステータス切り替え --}}
-                                    <form
-                                        action="{{ route('admin.reservation.toggle', $reservation->id) }}"
-                                        method="POST"
-                                    >
-                                        @csrf
+                            <form
+                                    action="{{ route('admin.reservation.updateStatus', $reservation) }}"
+                                    method="POST"
+                                >
+                                    @csrf
+                                    @method('PATCH')
 
-                                        @if ($reservation->status === '未確認')
-                                            <button
-                                                type="submit"
-                                                class="bg-[#22314C] text-white px-3 py-1 rounded"
-                                            >
-                                                確認済に変更
-                                            </button>
-                                        @else
-                                            <button
-                                                type="submit"
-                                                class="bg-white text-[#22314C] border border-[#22314C] px-3 py-1 rounded"
-                                            >
-                                                未確認に戻す
-                                            </button>
-                                        @endif
-                                    </form>
+                                    @if ($reservation->status === '未確認')
+                                        <input type="hidden" name="status" value="確認済">
+                                        <button class="bg-[#22314C] text-white px-3 py-1 rounded">
+                                            確認済に変更
+                                        </button>
+                                    @else
+                                        <input type="hidden" name="status" value="未確認">
+                                        <button class="bg-white border border-[#22314C] text-[#22314C] px-3 py-1 rounded">
+                                            未確認に戻す
+                                        </button>
+                                    @endif
+                                </form>
+
 
                                     {{-- 削除 --}}
                                  <button
