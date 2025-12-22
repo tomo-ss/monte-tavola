@@ -1,20 +1,27 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div
-        class="max-w-7xl mx-auto"
-        x-data="{
-            detailOpen: false,
-            contact: {
-                id: null,
-                name: '',
-                email: '',
-                subject: '',
-                message: '',
-                created_at: ''
-            }
-        }"
-    >
+<div
+    class="max-w-7xl mx-auto"
+    x-data="{
+        detailOpen: false,
+        deleteOpen: false,
+        contact: {
+            id: null,
+            name: '',
+            email: '',
+            subject: '',
+            message: '',
+            created_at: ''
+        },
+        deleteContact: {
+            id: null,
+            name: '',
+            subject: '',
+            created_at: ''
+        }
+    }"
+>
 
     <h1 class="text-xl font-semibold mb-6">お問い合わせ管理</h1>
 
@@ -67,7 +74,7 @@
                                 </div>
                             </td>
 
-                            {{-- 操作（予約管理と同じ並び） --}}
+                            {{-- 操作 --}}
                             <td class="border p-2">
                                 <div class="flex justify-center gap-2">
 
@@ -118,21 +125,21 @@
                                     </form>
 
                                     {{-- 削除 --}}
-                                    <form
-                                        action="{{ route('admin.contacts.destroy', $contact) }}"
-                                        method="POST"
-                                        onsubmit="return confirm('このお問い合わせを削除してもよろしいですか？');"
+                                    <button
+                                        type="button"
+                                        @click="
+                                            deleteOpen = true;
+                                            deleteContact = {
+                                                id: {{ $contact->id }},
+                                                name: '{{ $contact->name }}',
+                                                subject: '{{ $contact->subject }}',
+                                                created_at: '{{ $contact->created_at->format('Y/m/d H:i') }}'
+                                            }
+                                        "
+                                        class="bg-red-600 text-white px-3 py-1 rounded"
                                     >
-                                        @csrf
-                                        @method('DELETE')
-
-                                        <button
-                                            type="submit"
-                                            class="bg-red-600 text-white px-3 py-1 rounded"
-                                        >
-                                            削除
-                                        </button>
-                                    </form>
+                                        削除
+                                    </button>
 
                                 </div>
                             </td>
@@ -142,60 +149,114 @@
             </table>
         @endif
     </div>
+
     {{-- お問い合わせ詳細モーダル --}}
-<div
-    x-show="detailOpen"
-    x-cloak
-    x-transition
-    @click.self="detailOpen = false"
-    @keydown.escape.window="detailOpen = false"
-    class="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
->
-    <div class="bg-white w-full max-w-2xl rounded-xl px-12 py-10">
+    <div
+        x-show="detailOpen"
+        x-cloak
+        x-transition
+        @click.self="detailOpen = false"
+        @keydown.escape.window="detailOpen = false"
+        class="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+    >
+        <div class="bg-white w-full max-w-2xl rounded-xl px-12 py-10">
 
-        {{-- タイトル --}}
-        <h2 class="text-lg font-semibold border-b pb-3 mb-8">
-            お問い合わせ詳細
-        </h2>
+            <h2 class="text-lg font-semibold border-b pb-3 mb-8">
+                お問い合わせ詳細
+            </h2>
 
-        {{-- 基本情報 --}}
-        <div class="mb-10 flex justify-center">
-            <div class="w-[440px] pl-6">
-                <p class="font-semibold mb-3">■ 基本情報</p>
+            <div class="mb-10 flex justify-center">
+                <div class="w-[440px] pl-6">
+                    <p class="font-semibold mb-3">■ 基本情報</p>
 
-                <div class="grid grid-cols-[6rem_1rem_auto] gap-y-2 text-sm">
-                    <div>氏名</div><div>：</div><div x-text="contact.name"></div>
-                    <div>メール</div><div>：</div><div x-text="contact.email"></div>
-                    <div>件名</div><div>：</div><div x-text="contact.subject"></div>
-                    <div>受信日時</div><div>：</div><div x-text="contact.created_at"></div>
+                    <div class="grid grid-cols-[6rem_1rem_auto] gap-y-2 text-sm">
+                        <div>氏名</div><div>：</div><div x-text="contact.name"></div>
+                        <div>メール</div><div>：</div><div x-text="contact.email"></div>
+                        <div>件名</div><div>：</div><div x-text="contact.subject"></div>
+                        <div>受信日時</div><div>：</div><div x-text="contact.created_at"></div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        {{-- お問い合わせ内容 --}}
-        <div class="mb-12 flex justify-center">
-            <div class="w-[440px] pl-6">
-                <p class="font-semibold mb-3">■ お問い合わせ内容</p>
+            <div class="mb-12 flex justify-center">
+                <div class="w-[440px] pl-6">
+                    <p class="font-semibold mb-3">■ お問い合わせ内容</p>
 
-                <p
-                    class="text-sm whitespace-pre-wrap leading-relaxed break-words"
-                    x-text="contact.message"
-                ></p>
+                    <p
+                        class="text-sm whitespace-pre-wrap leading-relaxed break-words"
+                        x-text="contact.message"
+                    ></p>
+                </div>
             </div>
-        </div>
 
-        {{-- ボタン --}}
-        <div class="flex justify-center">
-            <button
-                type="button"
-                @click="detailOpen = false"
-                class="px-8 py-2 border border-[#22314C] rounded text-[#22314C]"
-            >
-                閉じる
-            </button>
-        </div>
+            <div class="flex justify-center">
+                <button
+                    type="button"
+                    @click="detailOpen = false"
+                    class="px-8 py-2 border border-[#22314C] rounded text-[#22314C]"
+                >
+                    閉じる
+                </button>
+            </div>
 
+        </div>
     </div>
-</div>
+
+    {{-- お問い合わせ削除モーダル --}}
+    <div
+        x-show="deleteOpen"
+        x-cloak
+        x-transition
+        @click.self="deleteOpen = false"
+        @keydown.escape.window="deleteOpen = false"
+        class="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+    >
+        <div class="bg-white w-full max-w-xl rounded-xl px-12 py-10">
+
+            <h2 class="text-lg font-semibold border-b pb-3 mb-8">
+                お問い合わせ削除の確認
+            </h2>
+
+            <p class="text-sm text-center mb-8">
+                こちらのお問い合わせを削除してもよろしいですか？<br>
+                <span>削除すると元に戻すことはできません。</span>
+            </p>
+
+            <div class="text-sm mb-10 flex justify-center">
+                <div class="grid grid-cols-[6rem_1rem_auto] gap-y-2">
+                    <div>氏名</div><div>：</div><div x-text="deleteContact.name"></div>
+                    <div>送信日時</div><div>：</div><div x-text="deleteContact.created_at"></div>
+                    <div>件名</div><div>：</div><div x-text="deleteContact.subject"></div>
+                </div>
+            </div>
+
+            <div class="flex justify-center gap-6">
+                <button
+                    type="button"
+                    @click="deleteOpen = false"
+                    class="px-6 py-2 border border-[#22314C] rounded text-[#22314C]"
+                >
+                    閉じる
+                </button>
+
+                <form
+                    :action="`/admin/contacts/${deleteContact.id}`"
+                    method="POST"
+                >
+                    @csrf
+                    @method('DELETE')
+
+                    <button
+                        type="submit"
+                        class="px-6 py-2 bg-red-600 text-white rounded"
+                    >
+                        削除する
+                    </button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
 </div>
 @endsection
