@@ -1,4 +1,6 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* 左→右 スワイプ背景＆文字色変更 */
 .btn-swipe-left-to-right {
@@ -24,7 +26,6 @@
 .btn-swipe-left-to-right:hover {
     color: #F8F8F8 !important;
 }
-
 
 .main-visual {
     transform: scale(1);
@@ -60,11 +61,10 @@
     animation: kenburns 8s ease-out infinite alternate;
 }
 
-/* 予約済の時間のグレーアウト*/
+/* 予約済の時間のグレーアウト */
 option:disabled {
     color: #999;
 }
 
 /* JS読み込み前にモーダル表示防止 */
 [x-cloak] { display: none !important; }
-
