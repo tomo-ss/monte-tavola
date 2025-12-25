@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* 左→右 スワイプ背景＆文字色変更 */
 .btn-swipe-left-to-right {
@@ -47,24 +45,20 @@
     transform: translateY(0);
 }
 
-/* Ken Burns（ズームアニメーション） */
+/* Ken Burns */
 @keyframes kenburns {
-    from {
-        transform: scale(1);
-    }
-    to {
-        transform: scale(1.08);
-    }
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
 }
 
 .zoom-kenburns {
     animation: kenburns 8s ease-out infinite alternate;
 }
 
-/* 予約済の時間のグレーアウト */
 option:disabled {
     color: #999;
 }
 
-/* JS読み込み前にモーダル表示防止 */
-[x-cloak] { display: none !important; }
+[x-cloak] {
+    display: none !important;
+}

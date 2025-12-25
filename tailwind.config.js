@@ -2,10 +2,11 @@
 export default {
   content: [
     "./resources/**/*.blade.php",
+    "./resources/**/*.php",        // ← これが超重要！
     "./resources/**/*.js",
     "./resources/**/*.vue",
-    "./resources/views/**/*.blade.php"
   ],
+
   safelist: [
     "w-[1248px]",
     "shadow-[0_4px_4px_rgba(0,0,0,0.5)]",
