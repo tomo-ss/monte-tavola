@@ -10,4 +10,10 @@ export default defineConfig({
     }),
     tailwindcss(),
   ],
+  server: {
+    host: true,
+    port: 5173,
+    strictPort: true,
+    cors: true, // ★ これがCORS解決
+  },
 });
