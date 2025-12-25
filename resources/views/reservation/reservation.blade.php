@@ -35,7 +35,7 @@
     <div class="max-w-[920px] mx-auto">
         <div class="bg-[#F1ECEB] rounded-[24px] px-6 md:px-16 py-12 md:py-14">
 
-            <form method="POST" action="{{ route('reservation.confirm') }}">
+            <form method="POST" action="{{ route('reservation.confirm', [], false) }}">
 
                 @csrf
 

@@ -70,7 +70,7 @@
         </div>
 
         {{-- hidden --}}
-        <form method="POST" action="{{ route('reservation.store') }}"
+        <form method="POST" action="{{ route('reservation.store', [], false) }}"
               class="flex justify-center gap-6">
             @csrf
             @foreach ($data as $key => $value)
