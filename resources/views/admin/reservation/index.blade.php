@@ -342,7 +342,7 @@
                     </button>
 
                     <form
-                        :action="`/admin/reservations/${reservation.id}`"
+                        :action="`/admin/reservation/${reservation.id}`"
                         method="POST"
                     >
                         @csrf
