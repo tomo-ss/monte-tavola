@@ -20,9 +20,12 @@
         'transparent_header' => !empty($transparent_header)
     ])
 
-    <main class="min-h-screen">
-        @yield('content')
-    </main>
+<main class="min-h-screen">
+    @yield('content')
+</main>
+
+
+
 
     @include('partials.footer')
 
