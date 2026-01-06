@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" dir="ltr">
+<html lang="ja" dir="ltr" class="overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
     <title>@yield('title') | Monte Tavola</title>
@@ -13,7 +13,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
-<body id="app" class="@yield('body_class') bg-[#F8F8F8] text-gray-800 font-sans">
+<body id="app" class="@yield('body_class') bg-[#F8F8F8] text-gray-800 font-sans overflow-x-hidden">
 
     {{-- TOP/MENU → 透明ヘッダー、その他 → 通常ヘッダー --}}
     @include('partials.header', [

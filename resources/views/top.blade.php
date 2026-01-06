@@ -12,17 +12,19 @@
 {{-- Hero / Main Visual --}}
 {{-- ========================================= --}}
 <section class="relative w-full overflow-hidden">
-    <div class="swiper main-visual-swiper h-screen md:h-[850px]">
-        <div class="swiper-wrapper">
+    <div class="swiper main-visual-swiper h-screen md:h-[850px] overflow-hidden">
+        <div class="swiper-wrapper overflow-hidden">
             @foreach ([1,2,3,4] as $i)
-                <div class="swiper-slide">
+                <div class="swiper-slide overflow-hidden">
                     <img src="{{ asset("images/top/main-visual-{$i}.jpg") }}"
-                         class="w-full h-full object-cover brightness-75 zoom-kenburns">
+                         class="block w-full h-full object-cover brightness-75 zoom-kenburns">
                 </div>
             @endforeach
         </div>
     </div>
 </section>
+
+
 
 {{-- ========================================= --}}
 {{-- About Us --}}
