@@ -67,3 +67,45 @@ option:disabled {
 .top-page.menu-open .swiper-wrapper {
     transform: none !important;
 }
+
+/* ===============================
+   TOPページ：前に出てしまう装飾要素を下げる
+   =============================== */
+.top-page .zoom-kenburns,
+.top-page .swiper,
+.top-page .swiper-wrapper,
+.top-page .swiper-slide,
+.top-page .z-10,
+.top-page .z-20 {
+    z-index: 0 !important;
+    position: relative;
+}
+
+/* モバイルメニュー表示中は TOP の装飾アニメーションを止める */
+.top-page.menu-open .zoom-kenburns,
+.top-page.menu-open .swiper,
+.top-page.menu-open .swiper-wrapper,
+.top-page.menu-open .swiper-slide {
+    animation: none !important;
+    transform: none !important;
+}
+
+/* SPでは Ken Burns を使わない */
+@media (max-width: 767px) {
+    .zoom-kenburns {
+        animation: none;
+    }
+}
+
+.top-page.menu-open *,
+.top-page.menu-open *::before,
+.top-page.menu-open *::after {
+    transform: none !important;
+    animation: none !important;
+}
+
+/* ===== 原因究明用：Ken Burns 完全停止 ===== */
+.zoom-kenburns {
+    animation: none !important;
+    transform: none !important;
+}

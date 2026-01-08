@@ -11,8 +11,8 @@
 {{-- ========================================= --}}
 {{-- Hero / Main Visual --}}
 {{-- ========================================= --}}
-<section class="relative w-full overflow-visible">
-    <div class="swiper main-visual-swiper h-screen md:h-[850px] overflow-hidden">
+<section class="relative w-full overflow-visible z-0">
+    <div class="swiper main-visual-swiper h-screen md:h-[850px] overflow-hidden z-0">
         <div class="swiper-wrapper overflow-hidden">
             @foreach ([1,2,3,4] as $i)
                 <div class="swiper-slide overflow-hidden">
@@ -76,7 +76,7 @@
 <div class="relative w-full flex justify-center mt-6">
 
 {{-- パスタ（大） --}} 
-<div class="w-full max-w-[560px] h-[380px] overflow-hidden shadow-md relative z-10">
+<div class="w-full max-w-[560px] h-[380px] overflow-hidden shadow-md relative">
 <img src="{{ asset('images/top/about_pasta.jpg') }}"
  alt="シーフードパスタ" 
  class="w-full h-full object-cover"> 
@@ -84,7 +84,7 @@
 
 {{-- スタッフ（小） --}} 
 <div class="w-[320px] h-[210px] overflow-hidden shadow-md
- absolute bottom-[-180px] left-[-40px] z-20">
+ absolute bottom-[-180px] left-[-40px]">
   <img src="{{ asset('images/top/about_staff.jpg') }}"
    alt="スタッフの写真" 
    class="w-full h-full object-cover">

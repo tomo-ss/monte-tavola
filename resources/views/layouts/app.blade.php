@@ -12,20 +12,13 @@
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    <style>
-    #mobile-menu {
-        display: none;
-    }
-    </style>
-
 
 </head>
 
 <body id="app"
       class="@yield('body_class')
              bg-[#F8F8F8] text-gray-800 font-sans
-             overflow-x-hidden
-             !transform-none">
+             overflow-x-hidden">
 
 
 
@@ -50,6 +43,10 @@
 
     {{-- ページ別スクリプト --}}
     @stack('scripts')
+
+
+    {{-- モバイルメニュー用ポータル --}}
+    <div id="overlay-root"></div>
 
 </body>
 </html>
