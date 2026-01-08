@@ -28,56 +28,31 @@
     </div>
 </header>
 
-@include('partials.mobile-menu')
-
-
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const header = document.getElementById('site-header');
-    const transparent = header?.dataset.transparent === "true";
+    if (!header) return;
+
+    const transparent = header.dataset.transparent === "true";
 
     // 初期背景
-    if (header) {
-        if (transparent) {
-            header.classList.add("bg-transparent");
-        } else {
-            header.classList.add("bg-[#363427]");
-        }
-
-        // TOP/MENUのときだけスクロールで背景変更
-        if (transparent) {
-            window.addEventListener("scroll", () => {
-                if (window.scrollY > 30) {
-                    header.classList.remove("bg-transparent");
-                    header.classList.add("bg-black/50", "backdrop-blur");
-                } else {
-                    header.classList.remove("bg-black/50", "backdrop-blur");
-                    header.classList.add("bg-transparent");
-                }
-            });
-        }
+    if (transparent) {
+        header.classList.add("bg-transparent");
+    } else {
+        header.classList.add("bg-[#363427]");
     }
 
-    // モバイルメニュー開閉（安全）
-    const mobileMenu = document.getElementById('mobile-menu');
-    const openBtn = document.getElementById('mobile-menu-open');
-    const closeBtn = document.getElementById('mobile-menu-close');
-    const backdrop = document.getElementById('mobile-menu-backdrop');
-
-    if (mobileMenu && openBtn && closeBtn && backdrop) {
-        const open = () => {
-            mobileMenu.classList.remove('translate-x-full');
-            backdrop.classList.remove('opacity-0', 'pointer-events-none');
-        };
-
-        const close = () => {
-            mobileMenu.classList.add('translate-x-full');
-            backdrop.classList.add('opacity-0', 'pointer-events-none');
-        };
-
-        openBtn.addEventListener('click', open);
-        closeBtn.addEventListener('click', close);
-        backdrop.addEventListener('click', close);
+    // PCのみスクロール処理
+    if (transparent && window.matchMedia('(min-width: 768px)').matches) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 30) {
+                header.classList.remove('bg-transparent');
+                header.classList.add('bg-black/50');
+            } else {
+                header.classList.remove('bg-black/50');
+                header.classList.add('bg-transparent');
+            }
+        });
     }
 });
 </script>

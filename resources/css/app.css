@@ -62,3 +62,8 @@ option:disabled {
 [x-cloak] {
     display: none !important;
 }
+
+/* TOPページでモバイルメニュー表示中は Swiper を止める */
+.top-page.menu-open .swiper-wrapper {
+    transform: none !important;
+}

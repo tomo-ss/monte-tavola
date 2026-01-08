@@ -11,9 +11,23 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <style>
+    #mobile-menu {
+        display: none;
+    }
+    </style>
+
+
 </head>
 
-<body id="app" class="@yield('body_class') bg-[#F8F8F8] text-gray-800 font-sans overflow-x-hidden">
+<body id="app"
+      class="@yield('body_class')
+             bg-[#F8F8F8] text-gray-800 font-sans
+             overflow-x-hidden
+             !transform-none">
+
+
 
     {{-- TOP/MENU → 透明ヘッダー、その他 → 通常ヘッダー --}}
     @include('partials.header', [
@@ -28,6 +42,8 @@
 
 
     @include('partials.footer')
+
+    @include('partials.mobile-menu')
 
     {{-- Swiper JS --}}
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>

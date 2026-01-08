@@ -11,7 +11,7 @@
 {{-- ========================================= --}}
 {{-- Hero / Main Visual --}}
 {{-- ========================================= --}}
-<section class="relative w-full overflow-hidden">
+<section class="relative w-full overflow-visible">
     <div class="swiper main-visual-swiper h-screen md:h-[850px] overflow-hidden">
         <div class="swiper-wrapper overflow-hidden">
             @foreach ([1,2,3,4] as $i)
@@ -198,12 +198,14 @@
 
 @push('scripts')
 <script>
-const mainSwiper = new Swiper('.main-visual-swiper', {
-  loop: true,
-  effect: 'fade',
-  speed: 1500,
-  autoplay: { delay: 3500, disableOnInteraction: false },
-  fadeEffect: { crossFade: true },
+document.addEventListener('DOMContentLoaded', () => {
+  window.mainSwiper = new Swiper('.main-visual-swiper', {
+    loop: true,
+    effect: 'fade',
+    speed: 1500,
+    autoplay: { delay: 3500, disableOnInteraction: false },
+    fadeEffect: { crossFade: true },
+  });
 });
 </script>
 @endpush
