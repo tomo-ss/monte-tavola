@@ -21,9 +21,10 @@
             <a href="/contact" class="hover:opacity-80">Contact</a>
         </nav>
         {{-- モバイルメニュー（SPのみ） --}}
-        <div class="md:hidden">
+        <div class="md:hidden ml-auto">
             <button id="mobile-menu-open" class="text-3xl leading-none">☰</button>
         </div>
+
 
     </div>
 </header>
@@ -34,16 +35,23 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!header) return;
 
     const transparent = header.dataset.transparent === "true";
+    const isMobile = !window.matchMedia('(min-width: 768px)').matches;
 
-    // 初期背景
+    // ===== 初期背景 =====
     if (transparent) {
-        header.classList.add("bg-transparent");
+        if (isMobile) {
+            // ★ SPは最初から半透明
+            header.classList.add('bg-black/50');
+        } else {
+            // PCは最初は透明
+            header.classList.add('bg-transparent');
+        }
     } else {
-        header.classList.add("bg-[#363427]");
+        header.classList.add('bg-[#363427]');
     }
 
-    // PCのみスクロール処理
-    if (transparent && window.matchMedia('(min-width: 768px)').matches) {
+    // ===== PCのみスクロール処理 =====
+    if (transparent && !isMobile) {
         window.addEventListener('scroll', () => {
             if (window.scrollY > 30) {
                 header.classList.remove('bg-transparent');
