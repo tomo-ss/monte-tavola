@@ -1,5 +1,6 @@
-<footer class="bg-[#363427] text-[#F8F8F8] py-12 mt-20">
-    <div class="container mx-auto px-6">
+<footer class="bg-[#363427] text-[#F8F8F8] py-12 mt-12 md:mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+
 
         {{-- 上段：店名・住所 --}}
         <div class="mb-10">
@@ -17,31 +18,39 @@
         <div class="border-t-2 border-[#F8F8F8]/40 pt-6">
 
             {{-- 下段：左寄せナビ（縦線区切り） --}}
-            <nav class="flex items-center gap-4 text-sm mb-4">
+            <nav class="flex flex-col
+                        md:flex-row md:flex-wrap
+                        items-start md:items-center
+                        gap-2 md:gap-4
+                        text-sm mb-4">
 
                 <a href="#about" class="hover:text-[#A6AEC1] transition">About Us</a>
-                <span class="text-white/30">|</span>
+                <span class="hidden md:inline text-white/30">|</span>
 
                 <a href="#news" class="hover:text-[#A6AEC1] transition">News</a>
-                <span class="text-white/30">|</span>
+                <span class="hidden md:inline text-white/30">|</span>
 
                 <a href="#menu" class="hover:text-[#A6AEC1] transition">Menu</a>
-                <span class="text-white/30">|</span>
+                <span class="hidden md:inline text-white/30">|</span>
 
                 <a href="#reservation" class="hover:text-[#A6AEC1] transition">Reservation</a>
-                <span class="text-white/30">|</span>
+                <span class="hidden md:inline text-white/30">|</span>
 
                 <a href="/access" class="hover:text-[#A6AEC1] transition">Access</a>
-                <span class="text-white/30">|</span>
+                <span class="hidden md:inline text-white/30">|</span>
 
                 <a href="/contact" class="hover:text-[#A6AEC1] transition">Contact</a>
 
             </nav>
 
-            {{-- コピーライト（右寄せ） --}}
-            <div class="text-right text-xs tracking-wide">
+
+
+
+            {{-- コピーライト（PC右寄せ・SP真ん中） --}}
+            <div class="text-center md:text-right text-xs tracking-wide mt-6">
                 © Monte Tavola 2025
             </div>
+
         </div>
 
     </div>
