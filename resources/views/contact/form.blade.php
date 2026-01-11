@@ -34,7 +34,7 @@
         @endif
 
         {{-- フォーム --}}
-        <form action="{{ route('contact.confirm') }}" method="POST" class="space-y-6">
+        <form action="{{ route('contact.confirm') }}" method="POST" class="space-y-6" novalidate>
             @csrf
 
             {{-- 氏名 --}}

@@ -20,7 +20,6 @@
         {{-- 入力内容一覧 --}}
         <div class="space-y-10 mb-10 text-[#363427] max-w-2xl mx-auto">
 
-
             {{-- 氏名 --}}
             <div>
                 <div class="flex items-start mb-3">
@@ -63,19 +62,25 @@
         {{-- ボタンエリア --}}
         <form action="{{ route('contact.complete') }}" method="POST" class="text-center">
             @csrf
+
+            {{-- hidden項目（messageだけtextareaで保持） --}}
             @foreach ($inputs as $key => $value)
-                <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                @if ($key === 'message')
+                    <textarea name="{{ $key }}" hidden>{{ $value }}</textarea>
+                @else
+                    <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+                @endif
             @endforeach
 
-            <button 
+            <button
                 type="submit"
                 name="action"
                 value="back"
-                class="py-3 px-10 mr-5 bg-[#F8F8F8]  border border-[#363427] text-[#363427] rounded hover:bg-[#e5e5e5] transition">
+                class="py-3 px-10 mr-5 bg-[#F8F8F8] border border-[#363427] text-[#363427] rounded hover:bg-[#e5e5e5] transition">
                 戻る
             </button>
 
-            <button 
+            <button
                 type="submit"
                 class="py-3 px-10 bg-[#363427] text-white rounded hover:opacity-80 transition">
                 送信する

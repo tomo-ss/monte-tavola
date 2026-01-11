@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\ContactRequest;
 use App\Models\Contact;
 
 class ContactController extends Controller
@@ -18,37 +18,31 @@ class ContactController extends Controller
     /**
      * 確認画面
      */
-    public function confirm(Request $request)
+    public function confirm(ContactRequest $request)
     {
-        // バリデーション
-        $validated = $request->validate([
-            'name'    => 'required|max:255',
-            'email'   => 'required|email|max:255',
-            'subject' => 'required|max:255',
-            'message' => 'required|max:2000',
-        ]);
+        $inputs = $request->validated();
 
-        return view('contact.confirm', ['inputs' => $validated]);
+        return view('contact.confirm', compact('inputs'));
     }
 
     /**
      * 完了画面 & DB保存
      */
-    public function complete(Request $request)
+    public function complete(ContactRequest $request)
     {
         // 戻るボタン
         if ($request->input('action') === 'back') {
-            return redirect()->route('contact.form')
-                             ->withInput($request->except('action'));
+            return redirect()
+                ->route('contact.form')
+                ->withInput($request->except('action'));
         }
 
-        // DB保存
         Contact::create([
             'name'    => $request->name,
             'email'   => $request->email,
             'subject' => $request->subject,
             'message' => $request->message,
-            'status'  => '未対応', // 初期値
+            'status'  => '未対応',
         ]);
 
         return view('contact.complete');
