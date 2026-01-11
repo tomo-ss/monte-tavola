@@ -2,7 +2,7 @@
 
 @php($transparent_header = true)
 
-@section('title', 'Monte Tavola - トップページ')
+@section('title', 'トップページ')
 @section('description', '自然に囲まれた隠れ家レストラン Monte Tavola の公式サイトです。')
 @section('body_class', 'top-page')
 

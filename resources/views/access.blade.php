@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'アクセス')
 @section('title', 'Access')
 @section('description', 'Monte Tavola へのアクセス情報')
 

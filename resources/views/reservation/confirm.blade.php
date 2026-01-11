@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'ご予約')
 @section('content')
 <div class="min-h-screen flex justify-center px-4 pt-32">
     <div class="w-full max-w-3xl">

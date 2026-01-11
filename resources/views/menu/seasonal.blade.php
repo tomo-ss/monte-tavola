@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'メニュー')
 @php($transparent_header = true)
 
 @section('title', 'Seasonal Menu')

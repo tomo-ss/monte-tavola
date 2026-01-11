@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'ご予約')
 @section('content')
 <div class="pt-44 pb-60 px-4">
 

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'ご予約')
 @php
     $reservation = session('reservation');
 @endphp
