@@ -27,9 +27,8 @@
     {{-- フォーム本体 --}}
     <div class="max-w-[920px] mx-auto">
         <div class="bg-[#F1ECEB] rounded-[24px] px-6 md:px-16 py-12 md:py-14">
+            <form method="POST" action="{{ route('reservation.confirm') }}" novalidate>
 
-            {{-- ★★★ ここが重要：false を完全に削除 ★★★ --}}
-            <form method="POST" action="{{ route('reservation.confirm') }}">
                 @csrf
 
                 {{-- ========= ご来店日時 ========= --}}
