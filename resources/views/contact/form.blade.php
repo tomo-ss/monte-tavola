@@ -70,10 +70,11 @@
                     <span class="ml-2 bg-[#363427] text-white text-xs px-2 py-1 rounded">必須</span>
                 </label>
                 <input type="text" 
-                    name="subject"
-                    value="{{ old('subject') }}"
-                    class="w-full border border-[#D6D3CE] p-3 rounded bg-[#F8F8F8] focus:ring-2 focus:ring-[#363427]">
-            </div>
+                        name="subject"
+                        value="{{ old('subject') }}"
+                        placeholder="例）アレルギーについてのご相談"
+                        class="w-full border border-[#D6D3CE] p-3 rounded bg-[#F8F8F8] focus:ring-2 focus:ring-[#363427]">
+                 </div>
 
             {{-- 本文 --}}
             <div>
@@ -84,8 +85,9 @@
                 <textarea 
                     name="message" 
                     rows="10"
-                    class="w-full border border-[#D6D3CE] p-3 rounded bg-[#F8F8F8] focus:ring-2 focus:ring-[#363427]">
-                    {{ old('message') }}</textarea>
+                    placeholder="例）卵が含まれているメニューを教えてください。"
+                    class="w-full border border-[#D6D3CE] p-3 rounded bg-[#F8F8F8] focus:ring-2 focus:ring-[#363427]">{{ old('message') }}</textarea>
+
             </div>
 
             {{-- ボタン --}}

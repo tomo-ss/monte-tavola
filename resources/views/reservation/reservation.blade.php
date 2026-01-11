@@ -141,9 +141,13 @@
                             </span>
                         </div>
                         <div>
-                            <input type="text" name="name" value="{{ old('name') }}"
-                                class="w-full h-11 rounded-lg border border-[#363427]/20 bg-white px-4 text-sm text-[#363427]
-                                       focus:outline-none focus:ring-2 focus:ring-[#363427]/20 focus:border-[#363427]/40">
+                            <input type="text"
+                                    name="name"
+                                    value="{{ old('name') }}"
+                                    placeholder="例）山中 三郎"
+                                    class="w-full h-11 rounded-lg border border-[#363427]/20 bg-white px-4 text-sm text-[#363427]
+                                        focus:outline-none focus:ring-2 focus:ring-[#363427]/20 focus:border-[#363427]/40">
+
                         </div>
                     </div>
 
@@ -156,9 +160,13 @@
                             </span>
                         </div>
                         <div>
-                            <input type="text" name="name_kana" value="{{ old('name_kana') }}"
-                                class="w-full h-11 rounded-lg border border-[#363427]/20 bg-white px-4 text-sm text-[#363427]
-                                       focus:outline-none focus:ring-2 focus:ring-[#363427]/20 focus:border-[#363427]/40">
+                           <input type="text"
+                                    name="name_kana"
+                                    value="{{ old('name_kana') }}"
+                                    placeholder="例）ヤマナカ サブロウ"
+                                    class="w-full h-11 rounded-lg border border-[#363427]/20 bg-white px-4 text-sm text-[#363427]
+                                        focus:outline-none focus:ring-2 focus:ring-[#363427]/20 focus:border-[#363427]/40">
+
                         </div>
                     </div>
 
@@ -171,9 +179,13 @@
                             </span>
                         </div>
                         <div>
-                            <input type="text" name="phone" value="{{ old('phone') }}"
-                                class="w-full h-11 rounded-lg border border-[#363427]/20 bg-white px-4 text-sm text-[#363427]
-                                       focus:outline-none focus:ring-2 focus:ring-[#363427]/20 focus:border-[#363427]/40">
+                            <input type="text"
+                                    name="phone"
+                                    value="{{ old('phone') }}"
+                                    placeholder="例）090-1234-5678"
+                                    class="w-full h-11 rounded-lg border border-[#363427]/20 bg-white px-4 text-sm text-[#363427]
+                                        focus:outline-none focus:ring-2 focus:ring-[#363427]/20 focus:border-[#363427]/40">
+
                         </div>
                     </div>
 
@@ -186,9 +198,13 @@
                             </span>
                         </div>
                         <div>
-                            <input type="email" name="email" value="{{ old('email') }}"
-                                class="w-full h-11 rounded-lg border border-[#363427]/20 bg-white px-4 text-sm text-[#363427]
-                                       focus:outline-none focus:ring-2 focus:ring-[#363427]/20 focus:border-[#363427]/40">
+                            <input type="email"
+                                    name="email"
+                                    value="{{ old('email') }}"
+                                    placeholder="例）yamanaka@example.com"
+                                    class="w-full h-11 rounded-lg border border-[#363427]/20 bg-white px-4 text-sm text-[#363427]
+                                        focus:outline-none focus:ring-2 focus:ring-[#363427]/20 focus:border-[#363427]/40">
+
                         </div>
                     </div>
                 </div>
@@ -197,15 +213,25 @@
                 <div class="my-10 border-t border-[#363427]/25"></div>
 
                 {{-- ========= 備考 ========= --}}
-                <div>
-                    <h2 class="text-sm text-[#363427] tracking-wider mb-6">
-                        ■ ご要望など
-                    </h2>
+                <h2 class="text-sm text-[#363427] tracking-wider mb-6">
+                    ■ ご要望など（アレルギー食材はこちらにご記入ください）
+                </h2>
 
-                    <textarea name="note" rows="7"
-                        class="w-full rounded-lg border border-[#363427]/20 bg-white px-4 py-3 text-sm text-[#363427]
-                               focus:outline-none focus:ring-2 focus:ring-[#363427]/20 focus:border-[#363427]/40">{{ old('note') }}</textarea>
+                <div class="grid grid-cols-1 md:grid-cols-[140px_80px_1fr] items-start gap-3 md:gap-6 py-3">
+                    <div class="text-sm text-[#363427]">備考欄</div>
+                    <div>
+                        <span class="inline-flex items-center justify-center h-6 w-12 rounded-md bg-[#5C5C5C] text-white text-xs tracking-wider">
+                            任意
+                        </span>
+                    </div>
+                    <div>
+                        <textarea name="note" rows="7"
+                            placeholder="例）アレルギー：卵／記念日のためデザートプレート希望"
+                            class="w-full rounded-lg border border-[#363427]/20 bg-white px-4 py-3 text-sm text-[#363427]
+                                focus:outline-none focus:ring-2 focus:ring-[#363427]/20 focus:border-[#363427]/40">{{ old('note') }}</textarea>
+                    </div>
                 </div>
+
 
                 {{-- ボタン --}}
                 <div class="flex justify-center mt-12">
