@@ -5,13 +5,16 @@
 
 @section('content')
 
-{{-- ===== Hero Title ===== --}}
+{{-- タイトル --}}
 <section class="pt-32 pb-10 text-center">
-    <h1 class="text-[#363427] text-3xl font-serif tracking-wide">
-        Access
-    </h1>
-    <p class="text-sm text-[#363427] mt-2">アクセス</p>
+  <h1 class="font-serif text-3xl md:text-4xl font-semibold text-[#363427]">
+    Access
+  </h1>
+  <p class="mt-2 text-sm text-[#363427]">
+    アクセス
+  </p>
 </section>
+
 
 {{-- ===== 説明文 & 電話番号 ===== --}}
 <section class="text-center px-6 max-w-3xl mx-auto">

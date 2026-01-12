@@ -5,13 +5,14 @@
 
     {{-- タイトル --}}
     <div class="text-center mb-16">
-        <h1 class="text-4xl md:text-5xl font-medium text-[#363427] tracking-wide leading-none">
-            Reservation
-        </h1>
-        <p class="mt-2 text-sm text-[#363427]/70 tracking-[0.25em]">
-            ご予約フォーム
-        </p>
+    <h1 class="font-serif text-3xl md:text-4xl font-semibold text-[#363427]">
+        Reservation
+    </h1>
+    <p class="mt-2 text-sm text-[#363427]">
+        ご予約
+    </p>
     </div>
+
 
     {{-- エラー --}}
     @if ($errors->any())

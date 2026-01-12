@@ -4,10 +4,15 @@
 <div class="py-16">
     
     {{--  タイトル  --}}
-    <div class="max-w-3xl mx-auto mt-20 mb-6">
-        <h1 class="text-center text-2xl font-semibold text-[#363427]">Contact</h1>
-        <p class="text-center text-sm text-[#363427] mt-1">お問い合わせフォーム</p>
+    <div class="max-w-3xl mx-auto mt-20 mb-6 text-center">
+    <h1 class="font-serif text-3xl md:text-4xl font-semibold text-[#363427]">
+        Contact
+    </h1>
+    <p class="mt-2 text-sm text-[#363427]">
+        お問い合わせ
+    </p>
     </div>
+
 
     {{-- フォームの背景 --}}
     <div class="max-w-3xl mx-auto bg-[#F1ECEB] p-10 rounded-2xl shadow-sm">

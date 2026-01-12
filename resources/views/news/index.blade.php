@@ -4,10 +4,15 @@
 
 <div class="max-w-5xl mx-auto py-16">
 
-    <div class="max-w-3xl mx-auto mt-20 mb-6">
-        <h1 class="text-center text-2xl font-semibold text-[#363427]">News</h1>
-        <p class="text-center text-sm text-[#363427] mt-1">おしらせ</p>
-    </div>
+{{--  タイトル  --}}
+<div class="max-w-3xl mx-auto mt-20 mb-12 text-center">
+    <h1 class="font-serif text-3xl md:text-4xl font-semibold text-[#363427]">
+        News
+    </h1>
+    <p class="mt-2 text-sm text-[#363427]">
+        おしらせ
+    </p>
+</div>
 
     {{-- ニュース一覧 --}}
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
