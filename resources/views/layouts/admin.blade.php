@@ -21,7 +21,7 @@
                 <a href="/admin/reservation" class="hover:opacity-80">予約管理</a>
                 <a href="/admin/news" class="hover:opacity-80">お知らせ管理</a>
                 <a href="/admin/holiday" class="hover:opacity-80">休業日管理</a>
-                <a href="/admin/contact" class="hover:opacity-80">お問い合わせ管理</a>
+                <a href="/admin/contacts" class="hover:opacity-80">お問い合わせ管理</a>
             </nav>
 
           {{-- 
