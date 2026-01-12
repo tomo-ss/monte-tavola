@@ -210,4 +210,13 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 @endpush
 
+@push('meta')
+<meta property="og:type" content="website">
+<meta property="og:title" content="Monte Tavola｜自然に囲まれた隠れ家イタリアン">
+<meta property="og:description" content="自然に囲まれた隠れ家レストラン Monte Tavola。落ち着いた空間で本格イタリアンをお楽しみいただけます。">
+<meta property="og:image" content="{{ asset('images/top/main-visual-1.jpg') }}">
+<meta property="og:url" content="{{ url('/') }}">
+<meta name="twitter:card" content="summary_large_image">
+@endpush
+
 @endsection
