@@ -24,16 +24,16 @@
                         gap-2 md:gap-4
                         text-sm mb-4">
 
-                <a href="#about" class="hover:text-[#A6AEC1] transition">About Us</a>
+                <a href="/#about" class="hover:text-[#A6AEC1] transition">About Us</a>
                 <span class="hidden md:inline text-white/30">|</span>
 
-                <a href="#news" class="hover:text-[#A6AEC1] transition">News</a>
+                <a href="/news" class="hover:text-[#A6AEC1] transition">News</a>
                 <span class="hidden md:inline text-white/30">|</span>
 
-                <a href="#menu" class="hover:text-[#A6AEC1] transition">Menu</a>
+                <a href="/#menu" class="hover:text-[#A6AEC1] transition">Menu</a>
                 <span class="hidden md:inline text-white/30">|</span>
 
-                <a href="#reservation" class="hover:text-[#A6AEC1] transition">Reservation</a>
+                <a href="/reservation" class="hover:text-[#A6AEC1] transition">Reservation</a>
                 <span class="hidden md:inline text-white/30">|</span>
 
                 <a href="/access" class="hover:text-[#A6AEC1] transition">Access</a>

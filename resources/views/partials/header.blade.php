@@ -1,6 +1,6 @@
 <header id="site-header"
         data-transparent="{{ $transparent_header ? 'true' : 'false' }}"
-        class="fixed top-0 left-0 w-full z-50
+        class="fixed top-0 left-0 w-full h-20 z-50
                transition-all duration-300 text-[#F8F8F8]">
 
 

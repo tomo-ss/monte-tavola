@@ -30,7 +30,7 @@
 {{-- About Us --}}
 {{-- ========================================= --}}
 <section id="about"
-    class="bg-[#F8F8F8] pt-16 pb-40 px-6 md:px-12 overflow-x-hidden">
+    class="bg-[#F8F8F8] pt-16 pb-40 px-6 md:px-12 overflow-x-hidden scroll-mt-20">
 
   <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-10 items-center">
 

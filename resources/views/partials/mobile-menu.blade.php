@@ -41,19 +41,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!openBtn || !closeBtn || !overlay || !root) return;
 
-    // ★ ここが最重要：DOMを body 最後へ移動
+    // body 最後へ移動
     root.appendChild(overlay);
+
+    const closeMenu = () => {
+        overlay.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+    };
 
     openBtn.addEventListener('click', () => {
         overlay.classList.remove('hidden');
         document.body.classList.add('overflow-hidden');
     });
 
-    closeBtn.addEventListener('click', () => {
-        overlay.classList.add('hidden');
-        document.body.classList.remove('overflow-hidden');
+    closeBtn.addEventListener('click', closeMenu);
+
+    overlay.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            closeMenu();
+        });
     });
 });
 </script>
+
 @endpush
 
