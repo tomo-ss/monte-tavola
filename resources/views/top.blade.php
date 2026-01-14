@@ -36,7 +36,7 @@
 
     {{-- 左：文章 --}}
     <div class="flex flex-col items-start">
-      <h2 class="text-5xl font-bold text-[#363427] mb-4">About Us</h2>
+      <h2 class="text-5xl font-serif text-[#363427] mb-4">About Us</h2>
       <p class="text-[#363427] leading-relaxed max-w-2xl mb-10">私たちについて</p>
 
       <div class="space-y-4 text-[#363427] leading-relaxed text-[16px]">
@@ -102,7 +102,7 @@
 <section id="news" class="py-16 px-6 md:px-12 bg-[#F1ECEB]">
   <div class="max-w-7xl mx-auto">
 
-    <h2 class="text-5xl font-bold text-center text-[#363427] mb-2">News</h2>
+    <h2 class="text-5xl font-serif text-center text-[#363427] mb-2">News</h2>
     <p class="text-center text-[#363427] mb-8">おしらせ</p>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -149,7 +149,7 @@
 {{-- ========================================= --}}
 <section id="menu" class="py-14 px-6">
   <div class="max-w-6xl mx-auto">
-    <h2 class="text-5xl font-bold text-center text-[#363427] mb-2">Menu</h2>
+    <h2 class="text-5xl font-serif text-center text-[#363427] mb-2">Menu</h2>
     <p class="text-center text-[#363427] mb-6">メニュー</p>
 
     <div class="flex flex-wrap justify-center gap-6">
@@ -158,7 +158,10 @@
           <img src="{{ asset("images/top/menu_{$type}.png") }}"
                class="w-full h-full object-cover">
           <span class="absolute inset-0 flex items-center justify-center
-                       text-white text-2xl font-semibold capitalize">
+                      font-serif text-white text-3xl md:text-4xl
+                      font-medium capitalize drop-shadow-lg">
+
+
             {{ $type }}
           </span>
           <a href="/menu/{{ $type }}"
@@ -179,7 +182,7 @@
 {{-- ========================================= --}}
 <section id="access" class="py-16 px-6 md:px-12 bg-[#F1ECEB]">
   <div class="max-w-7xl mx-auto text-center">
-    <h2 class="text-5xl font-bold text-[#363427] mb-2">Access</h2>
+    <h2 class="text-5xl font-serif text-[#363427] mb-2">Access</h2>
     <p class="text-[#363427] mb-8">アクセス</p>
 
     <iframe class="w-full h-[350px] border-0"
