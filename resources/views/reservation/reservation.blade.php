@@ -13,17 +13,32 @@
     </p>
     </div>
 
+{{-- エラー --}}
+@if ($errors->any())
+  <div class="max-w-[920px] mx-auto mb-8 rounded-xl border border-red-200 bg-red-50 px-5 py-4 text-sm text-red-700">
+    <ul class="list-disc pl-5 space-y-1">
+      @php
+        $order = [
+          'date',
+          'time',
+          'people_count',
+          'name',
+          'name_kana',
+          'phone',
+          'email',
+        ];
+      @endphp
 
-    {{-- エラー --}}
-    @if ($errors->any())
-        <div class="max-w-[920px] mx-auto mb-8 rounded-xl border border-red-200 bg-red-50 px-5 py-4 text-sm text-red-700">
-            <ul class="list-disc pl-5 space-y-1">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+      @foreach ($order as $field)
+        @error($field)
+          <li>{{ $message }}</li>
+        @enderror
+      @endforeach
+
+    </ul>
+  </div>
+@endif
+
 
     {{-- フォーム本体 --}}
     <div class="max-w-[920px] mx-auto">
