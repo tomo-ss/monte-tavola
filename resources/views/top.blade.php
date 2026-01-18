@@ -157,28 +157,35 @@
 
     <div class="flex flex-wrap justify-center gap-6">
       @foreach (['food','drink','seasonal'] as $type)
-        <div class="relative w-[340px] h-[390px] overflow-hidden rounded">
-          <img src="{{ asset("images/top/menu_{$type}.png") }}"
-               class="w-full h-full object-cover">
-          <span class="absolute inset-0 flex items-center justify-center
-                      font-serif text-white text-3xl md:text-4xl
-                      font-medium capitalize drop-shadow-lg">
+
+        <div class="relative w-[340px]">
+  <img
+    src="{{ asset("images/top/menu_{$type}.png") }}"
+    class="block mx-auto max-w-full h-auto"
+  >
+
+  <span
+    class="pointer-events-none absolute inset-0 flex items-center justify-center
+           font-serif text-white text-3xl md:text-4xl
+           font-medium capitalize drop-shadow-lg">
+    {{ $type }}
+  </span>
+
+  <a href="/menu/{{ $type }}"
+     class="absolute bottom-16 left-1/2 -translate-x-1/2
+            px-5 py-2 rounded-[10px]
+            bg-[#F8F8F8]/90 text-[#363427]
+            hover:bg-[#363427] hover:text-white transition">
+    View Menu
+  </a>
+</div>
 
 
-            {{ $type }}
-          </span>
-          <a href="/menu/{{ $type }}"
-             class="absolute bottom-16 left-1/2 -translate-x-1/2
-                    px-5 py-2 rounded-[10px]
-                    bg-[#F8F8F8]/90 text-[#363427]
-                    hover:bg-[#363427] hover:text-white transition">
-            View Menu
-          </a>
-        </div>
       @endforeach
     </div>
   </div>
 </section>
+
 
 {{-- ========================================= --}}
 {{-- Access --}}
