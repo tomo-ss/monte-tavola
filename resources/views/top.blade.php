@@ -196,8 +196,14 @@
     <p class="text-[#363427] mb-8">アクセス</p>
 
     <iframe class="w-full h-[350px] border-0"
-        src="https://www.google.com/maps/embed?pb=!1m18..."
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3214.9969508187446!2d137.636347976502!3d36.24874199533765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601d1c9f3e1c7c0f%3A0x9b2c3c4c9c0a5d5!2z5Lq65aSn5Zyw!5e0!3m2!1sja!2sjp!4v1737180000000"
         loading="lazy"></iframe>
+
+    <p class="text-sm text-gray-500 mt-2">
+    ※ 本店舗は架空のため、地図は参考表示です。
+    </p>
+
+  
 
     <div class="mt-8 text-right">
       <a href="/access"

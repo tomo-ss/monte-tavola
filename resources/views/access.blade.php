@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('title', 'アクセス')
-@section('title', 'Access')
 @section('description', 'Monte Tavola へのアクセス情報')
 
 @section('content')
@@ -24,13 +23,17 @@
     <p class="text-[#363427] text-sm mt-1 font-medium">
         TEL：0000-000-0000
     </p>
+    <p class="text-sm text-gray-500 mt-2">
+    ※ 本店舗は架空のため、地図は参考表示です。
+    </p>
+
 </section>
 
 {{-- ===== Google Map 埋め込み ===== --}}
 <section class="mt-10 px-6 max-w-4xl mx-auto">
     <div class="w-full h-[350px] md:h-[450px] shadow-sm">
         <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.521870216447!2d139.81070087611593!3d35.71003467258079!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018894ec7c244b7%3A0x6a11145892556277!2z5p2x5Lqs6aeF!5e0!3m2!1sja!2sjp!4v1636592400000!5m2!1sja!2sjp"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3214.9969508187446!2d137.636347976502!3d36.24874199533765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601d1c9f3e1c7c0f%3A0x9b2c3c4c9c0a5d5!2z5Lq65aSn5Zyw!5e0!3m2!1sja!2sjp!4v1737180000000"
             width="100%"
             height="100%"
             style="border:0;"
