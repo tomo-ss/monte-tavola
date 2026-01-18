@@ -66,12 +66,13 @@
         ご予約はこちら
       </a>
 
-      <a href="/contact"
-        class="mt-3 block w-full md:w-[300px]
-              text-center text-[#363427] underline
-              hover:text-green-700 font-medium">
-        ご予約以外のお問い合わせはこちらから
-      </a>
+    <a href="/contact"
+      class="mt-3 block w-full md:w-[300px]
+            text-center text-[#363427] underline
+            hover:text-green-700 font-medium">
+      ご予約以外のお問い合わせはこちらから
+    </a>
+
     </div>
 
 {{-- 右：画像 --}} 
