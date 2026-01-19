@@ -7,9 +7,11 @@
 <div class="max-w-4xl mx-auto py-16">
 
     {{-- タイトル --}}
-    <h1 class="text-2xl font-semibold text-[#363427] mb-12 border-b pb-3">
+    <h1 class="text-xl font-semibold border-b pb-2 mb-6" style="border-color:#5A7193;">
         お知らせ投稿完了
     </h1>
+
+
 
     {{-- 完了メッセージ --}}
     <p class="text-center text-2xl font-semibold text-[#363427] mt-24">

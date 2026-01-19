@@ -3,9 +3,9 @@
 @section('content')
 <div class="max-w-7xl mx-auto">
 
-    <h1 class="text-xl font-semibold mb-10">
-        休業日登録
-    </h1>
+<h1 class="text-xl font-semibold border-b pb-2 mb-6" style="border-color:#5A7193;"> 
+    休業日登録 
+</h1>
 
     {{-- バリデーションエラー --}}
     @if ($errors->any())
@@ -24,14 +24,12 @@
         action="{{ route('admin.holiday.store') }}"
         class="bg-white p-10 max-w-6xl mx-auto"
     >
-
         @csrf
 
         <p class="font-semibold mb-8">■ 休業日登録</p>
 
+        {{-- 休業日 --}}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-
-            {{-- 休業日 --}}
             <div>
                 <label class="block font-semibold mb-2">
                     休業日
@@ -44,50 +42,49 @@
                     required
                 >
             </div>
-
-            {{-- 種別 --}}
-<div class="md:col-span-2">
-    <p class="font-semibold mb-2">
-        種別
-    </p>
-    <div class="flex gap-10 mt-2">
-        <label class="flex items-center gap-2">
-            <input
-                type="radio"
-                name="type"
-                value="定休日"
-                @checked(old('type', '定休日') === '定休日')
-            >
-            定休日
-        </label>
-
-        <label class="flex items-center gap-2">
-            <input
-                type="radio"
-                name="type"
-                value="臨時休業"
-                @checked(old('type') === '臨時休業')
-            >
-            臨時休業
-        </label>
-    </div>
-</div>
-
-            {{-- 備考（横幅いっぱい使う） --}}
-            <div class="md:col-span-2">
-                <label class="block font-semibold mb-2">
-                    備考（任意）
-                </label>
-                <textarea
-                    name="note"
-                    rows="4"
-                    class="border p-2 w-full"
-                >{{ old('note') }}</textarea>
-            </div>
-
         </div>
 
-        {{-- ボタン --}}
+        {{-- 種別（横並び） --}}
+        <div class="mt-10">
+            <p class="font-semibold mb-2">
+                種別
+            </p>
+            <div class="flex gap-10 mt-2">
+                <label class="flex items-center gap-2">
+                    <input
+                        type="radio"
+                        name="type"
+                        value="定休日"
+                        @checked(old('type', '定休日') === '定休日')
+                    >
+                    定休日
+                </label>
+
+                <label class="flex items-center gap-2">
+                    <input
+                        type="radio"
+                        name="type"
+                        value="臨時休業"
+                        @checked(old('type') === '臨時休業')
+                    >
+                    臨時休業
+                </label>
+            </div>
+        </div>
+
+        {{-- 備考 --}}
+        <div class="mt-10">
+            <label class="block font-semibold mb-2">
+                備考（任意）
+            </label>
+            <textarea
+                name="note"
+                rows="4"
+                class="border p-2 w-full"
+            >{{ old('note') }}</textarea>
+        </div>
+
+        {{-- ボタン（白背景内） --}}
         <div class="flex justify-center mt-16 gap-6">
             <a
                 href="{{ route('admin.holiday.index') }}"

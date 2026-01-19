@@ -22,7 +22,10 @@
 >
 
 
-    <h1 class="text-xl font-semibold mb-6">予約管理</h1>
+    <h1 class="text-xl font-semibold border-b pb-2 mb-6" style="border-color:#5A7193;">
+    予約管理
+    </h1>
+
 
     {{-- 削除成功メッセージ --}}
 @if (session('success'))

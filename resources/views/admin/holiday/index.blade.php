@@ -15,7 +15,7 @@
 >
 
     {{-- タイトル --}}
-    <h1 class="text-xl font-semibold mb-10">
+    <h1 class="text-xl font-semibold border-b pb-2 mb-6" style="border-color:#5A7193;">
         休業日管理
     </h1>
 

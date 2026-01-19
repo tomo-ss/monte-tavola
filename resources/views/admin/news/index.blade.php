@@ -15,7 +15,10 @@
     }"
 >
 
-    <h1 class="text-xl font-semibold mb-16">お知らせ管理</h1>
+    <h1 class="text-xl font-semibold border-b pb-2 mb-6" style="border-color:#5A7193;">
+    お知らせ管理
+    </h1>
+
 
     {{-- 成功メッセージ --}}
     @if (session('success'))
