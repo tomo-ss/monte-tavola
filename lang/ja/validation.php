@@ -128,6 +128,9 @@ return [
         'email'   => 'メールアドレス',
         'subject' => '件名',
         'message' => '本文',
+        'date' => '日付',
+        'type' => '種別',
+        'note' => '備考',
     ],
 
 ];

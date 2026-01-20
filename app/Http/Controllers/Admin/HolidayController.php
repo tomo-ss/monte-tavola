@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreHolidayRequest;
+use App\Http\Requests\UpdateHolidayRequest;
 use App\Models\Holiday;
 
 class HolidayController extends Controller
@@ -26,35 +27,23 @@ class HolidayController extends Controller
     }
 
     /**
-     * 保存処理
+     * 新規登録（即時登録）
      */
-    public function store(Request $request)
+    public function store(StoreHolidayRequest $request)
     {
-        $validated = $request->validate([
-            'date' => 'required|date|unique:holidays,date',
-            'type' => 'required|string|max:20',
-            'note' => 'nullable|string',
-        ]);
-
-        Holiday::create($validated);
+        Holiday::create($request->validated());
 
         return redirect()
             ->route('admin.holiday.index')
             ->with('success', '休業日を登録しました。');
-    } 
+    }
 
     /**
      * 更新処理
      */
-    public function update(Request $request, Holiday $holiday)
+    public function update(UpdateHolidayRequest $request, Holiday $holiday)
     {
-        $validated = $request->validate([
-            'date' => 'required|date|unique:holidays,date,' . $holiday->id,
-            'type' => 'required|string|max:20',
-            'note' => 'nullable|string',
-        ]);
-
-        $holiday->update($validated);
+        $holiday->update($request->validated());
 
         return redirect()
             ->route('admin.holiday.index')

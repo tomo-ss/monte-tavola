@@ -31,5 +31,8 @@ return [
         'body'         => '本文',
         'published_at' => '公開日',
         'image'        => '画像',
+        'date' => '休業日',
+        'type' => '種別',
+        'note' => '備考',
     ],
 ];

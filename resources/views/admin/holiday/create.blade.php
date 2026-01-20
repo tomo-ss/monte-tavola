@@ -26,7 +26,6 @@
     >
         @csrf
 
-        <p class="font-semibold mb-8">■ 休業日登録</p>
 
         {{-- 休業日 --}}
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -39,7 +38,6 @@
                     name="date"
                     value="{{ old('date') }}"
                     class="border p-2 w-full"
-                    required
                 >
             </div>
         </div>
