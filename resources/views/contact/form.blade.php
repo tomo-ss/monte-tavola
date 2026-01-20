@@ -27,16 +27,28 @@
             </p>
         </div>
 
-        {{-- エラー表示 --}}
-        @if ($errors->any())
-            <div class="bg-red-100 text-red-700 p-4 rounded mb-6">
-                <ul class="list-disc ml-6">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+    {{-- エラー表示 --}}
+    @if ($errors->any())
+    <div class="max-w-3xl mx-auto mb-8 rounded-xl border border-red-200 bg-red-50 px-5 py-4 text-sm text-red-700">
+        <ul class="list-disc pl-5 space-y-1">
+        @php
+            $order = [
+            'name',
+            'email',
+            'subject',
+            'message',
+            ];
+        @endphp
+
+        @foreach ($order as $field)
+            @error($field)
+            <li>{{ $message }}</li>
+            @enderror
+        @endforeach
+        </ul>
+    </div>
+    @endif
+
 
         {{-- フォーム --}}
         <form action="{{ route('contact.confirm') }}" method="POST" class="space-y-6" novalidate>
