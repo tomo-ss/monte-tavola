@@ -1,7 +1,5 @@
 @extends('layouts.admin')
-
-@section('title', 'お知らせ投稿確認')
-
+@section('title', 'お知らせ管理')
 @section('content')
 
 <div class="max-w-4xl mx-auto py-16">

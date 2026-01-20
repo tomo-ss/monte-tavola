@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@section('title', '休業日管理')
 @section('content')
 <div class="max-w-7xl mx-auto">
 

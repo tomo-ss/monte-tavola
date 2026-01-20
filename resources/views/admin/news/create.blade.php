@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-
+@section('title', 'お知らせ管理')
 @section('content')
 <div class="max-w-7xl mx-auto">
 
