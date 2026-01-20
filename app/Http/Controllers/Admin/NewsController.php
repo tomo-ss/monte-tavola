@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Requests\StoreNewsRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\News;
+
 
 class NewsController extends Controller
 {
@@ -100,15 +102,10 @@ class NewsController extends Controller
     /**
      * 確認画面へ（POST）
      */
-    public function confirm(Request $request)
+    public function confirm(StoreNewsRequest $request)
     {
-        // バリデーション（とりあえず必須だけ）
-        $validated = $request->validate([
-            'title'         => 'required|max:255',
-            'body'          => 'nullable',
-            'image'         => 'nullable|image',
-            'published_at'  => 'required|date',
-        ]);
+        // FormRequestで定義したルールを使う
+        $validated = $request->validated();
 
         // 画像があれば一時保存（本保存は store）
         $tempImagePath = null;
@@ -125,21 +122,18 @@ class NewsController extends Controller
     /**
      * データ保存（完了画面へ）
      */
-    public function store(Request $request)
+    public function store(StoreNewsRequest $request)
     {
-        // hiddenで受け取るデータ
-        $data = $request->all();
+        $data = $request->validated();
 
         // 画像の本保存
         $imagePath = null;
         if (!empty($data['image_path'])) {
-            // temp → news に移動
             $newPath = str_replace('temp/', 'news/', $data['image_path']);
             \Storage::disk('public')->move($data['image_path'], $newPath);
             $imagePath = $newPath;
         }
 
-        // DB登録
         News::create([
             'title'         => $data['title'],
             'body'          => $data['body'] ?? null,
@@ -149,6 +143,7 @@ class NewsController extends Controller
 
         return redirect()->route('admin.news.complete');
     }
+
 
     /**
      * 完了画面

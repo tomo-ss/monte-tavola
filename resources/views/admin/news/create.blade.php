@@ -8,6 +8,18 @@
         お知らせ投稿フォーム
     </h1>
 
+    {{-- エラーメッセージ --}}
+@if ($errors->any())
+    <div class="mb-6 rounded bg-red-100 p-4 text-red-700">
+        <ul class="list-disc pl-5">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+
     {{-- 投稿フォーム --}}
     <form
         action="{{ route('admin.news.confirm') }}"
