@@ -17,7 +17,7 @@ class ReservationRequest extends FormRequest
     {
         return [
             'name'         => ['required', 'string', 'max:100'],
-            'name_kana'    => ['required', 'string', 'max:100', 'regex:/^[ァ-ヶー]+$/u'],
+            'name_kana'    => ['required', 'string', 'max:100', 'regex:/^[ァ-ヶー\s　]+$/u'],
             'email'        => ['required', 'email', 'max:255'],
             'phone'        => ['required', 'string', 'max:20'],
             'date'         => ['required', 'date'],
