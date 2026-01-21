@@ -158,27 +158,32 @@ Route::prefix('admin')->group(function () {
     Route::get('/news/create', [NewsController::class, 'create'])
         ->name('admin.news.create');
 
+    // 確認
     Route::post('/news/confirm', [NewsController::class, 'confirm'])
         ->name('admin.news.confirm');
 
     Route::post('/news/store', [NewsController::class, 'store'])
         ->name('admin.news.store');
 
+       Route::get('/news/confirm', function () {
+        return redirect()->route('admin.news.create');
+    });
+
+
+    // 完了
     Route::get('/news/complete', [NewsController::class, 'complete'])
         ->name('admin.news.complete');
 
-    // 編集フォーム
     Route::get('/news/{id}/edit', [NewsController::class, 'edit'])
         ->name('admin.news.edit');
 
-    // 更新処理
     Route::post('/news/{id}/update', [NewsController::class, 'update'])
         ->name('admin.news.update');
 
-    // 削除
     Route::post('/news/{id}/delete', [NewsController::class, 'delete'])
         ->name('admin.news.delete');
 
+    
 });
 
 // ===============================

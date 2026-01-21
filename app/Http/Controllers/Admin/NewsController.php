@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\StoreNewsRequest;
+use App\Http\Requests\SaveNewsRequest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\News;
@@ -122,7 +123,7 @@ class NewsController extends Controller
     /**
      * データ保存（完了画面へ）
      */
-    public function store(StoreNewsRequest $request)
+    public function store(SaveNewsRequest $request)
     {
         $data = $request->validated();
 
