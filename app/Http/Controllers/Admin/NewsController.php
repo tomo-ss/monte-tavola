@@ -69,7 +69,20 @@ class NewsController extends Controller
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('news', 'public');
             $validated['image_path'] = $imagePath;
+
+            // ===== Xserver本番用：public_html に自動コピー =====
+            $from = storage_path('app/public/' . $imagePath);
+            $to   = base_path('public_html/storage/' . $imagePath);
+
+            if (!file_exists(dirname($to))) {
+                mkdir(dirname($to), 0755, true);
+            }
+
+            if (file_exists($from)) {
+                copy($from, $to);
+            }
         }
+
 
         $news->update($validated);
 
@@ -133,6 +146,18 @@ class NewsController extends Controller
             $newPath = str_replace('temp/', 'news/', $data['image_path']);
             \Storage::disk('public')->move($data['image_path'], $newPath);
             $imagePath = $newPath;
+
+            // ===== Xserver本番用：public_html に自動コピー =====
+            $from = storage_path('app/public/' . $imagePath);
+            $to   = base_path('public_html/storage/' . $imagePath);
+
+            if (!file_exists(dirname($to))) {
+                mkdir(dirname($to), 0755, true);
+            }
+
+            if (file_exists($from)) {
+                copy($from, $to);
+            }
         }
 
         News::create([
