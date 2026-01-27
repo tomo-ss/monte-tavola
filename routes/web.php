@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 // ===============================
-// Controller imports（※必ず先頭）
+// Controller imports
 // ===============================
 use App\Http\Controllers\TopController;
 use App\Http\Controllers\ReservationController;
@@ -107,131 +107,99 @@ Route::get('/news/{id}', [UserNewsController::class, 'show'])
 
 
 // ===============================
-// 管理側：TOP（Admin）
+// 管理側：ログイン（auth / Admin）
 // ===============================
-Route::prefix('admin')->group(function () {
-
-    Route::get('/', function () {
-        return view('admin.index');
-    })->name('admin.index');
-
-});
-
-// ===============================
-// 管理側：予約管理（Reservation / Admin）
-// ===============================
-Route::prefix('admin')->name('admin.')->group(function () {
-
-    // 一覧
-    Route::get('/reservation', [AdminReservationController::class, 'index'])
-        ->name('reservation.index');
-
-    // CSV出力
-    Route::get('/reservation/csv', [AdminReservationController::class, 'exportCsv'])
-        ->name('reservation.csv');
-
-    // ステータス更新
-    Route::patch(
-        '/reservation/{reservation}/status',
-        [AdminReservationController::class, 'updateStatus']
-    )->name('reservation.updateStatus');
-
-    // 削除
-    Route::delete(
-        '/reservation/{reservation}',
-        [AdminReservationController::class, 'destroy']
-    )->name('reservation.destroy');
-
-});
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
 
 
 // ===============================
-// 管理側：お知らせ（News / Admin）
+// 管理側：共通（Admin）
 // ===============================
-Route::prefix('admin')->group(function () {
+Route::prefix('admin')
+    ->middleware('auth')
+    ->name('admin.')
+    ->group(function () {
 
-    // 一覧
-    Route::get('/news', [NewsController::class, 'index'])
-        ->name('admin.news.index');
+        // 管理TOP
+        Route::get('/', function () {
+            return view('admin.index');
+        })->name('index');
 
-    // 新規作成
-    Route::get('/news/create', [NewsController::class, 'create'])
-        ->name('admin.news.create');
+        // ===============================
+        // 管理側：予約管理
+        // ===============================
+        Route::get('/reservation', [AdminReservationController::class, 'index'])
+            ->name('reservation.index');
 
-    // 確認
-    Route::post('/news/confirm', [NewsController::class, 'confirm'])
-        ->name('admin.news.confirm');
+        Route::get('/reservation/csv', [AdminReservationController::class, 'exportCsv'])
+            ->name('reservation.csv');
 
-    Route::post('/news/store', [NewsController::class, 'store'])
-        ->name('admin.news.store');
+        Route::patch(
+            '/reservation/{reservation}/status',
+            [AdminReservationController::class, 'updateStatus']
+        )->name('reservation.updateStatus');
 
-       Route::get('/news/confirm', function () {
-        return redirect()->route('admin.news.create');
+        Route::delete(
+            '/reservation/{reservation}',
+            [AdminReservationController::class, 'destroy']
+        )->name('reservation.destroy');
+
+        // ===============================
+        // 管理側：お知らせ
+        // ===============================
+        Route::get('/news', [NewsController::class, 'index'])
+            ->name('news.index');
+
+        Route::get('/news/create', [NewsController::class, 'create'])
+            ->name('news.create');
+
+        Route::post('/news/confirm', [NewsController::class, 'confirm'])
+            ->name('news.confirm');
+
+        Route::post('/news/store', [NewsController::class, 'store'])
+            ->name('news.store');
+
+        Route::get('/news/complete', [NewsController::class, 'complete'])
+            ->name('news.complete');
+
+        Route::get('/news/{id}/edit', [NewsController::class, 'edit'])
+            ->name('news.edit');
+
+        Route::post('/news/{id}/update', [NewsController::class, 'update'])
+            ->name('news.update');
+
+        Route::post('/news/{id}/delete', [NewsController::class, 'delete'])
+            ->name('news.delete');
+
+        // ===============================
+        // 管理側：休業日設定
+        // ===============================
+        Route::get('/holiday', [HolidayController::class, 'index'])
+            ->name('holiday.index');
+
+        Route::get('/holiday/create', [HolidayController::class, 'create'])
+            ->name('holiday.create');
+
+        Route::post('/holiday/store', [HolidayController::class, 'store'])
+            ->name('holiday.store');
+
+        Route::post('/holiday/{holiday}/update', [HolidayController::class, 'update'])
+            ->name('holiday.update');
+
+        Route::post('/holiday/{holiday}/delete', [HolidayController::class, 'destroy'])
+            ->name('holiday.delete');
+
+        // ===============================
+        // 管理側：お問い合わせ管理
+        // ===============================
+        Route::get('/contacts', [AdminContactController::class, 'index'])
+            ->name('contacts.index');
+
+        Route::patch('/contacts/{contact}/status', [AdminContactController::class, 'updateStatus'])
+            ->name('contacts.updateStatus');
+
+        Route::delete('/contacts/{contact}', [AdminContactController::class, 'destroy'])
+            ->name('contacts.destroy');
     });
-
-
-    // 完了
-    Route::get('/news/complete', [NewsController::class, 'complete'])
-        ->name('admin.news.complete');
-
-    Route::get('/news/{id}/edit', [NewsController::class, 'edit'])
-        ->name('admin.news.edit');
-
-    Route::post('/news/{id}/update', [NewsController::class, 'update'])
-        ->name('admin.news.update');
-
-    Route::post('/news/{id}/delete', [NewsController::class, 'delete'])
-        ->name('admin.news.delete');
-
-    
-});
-
-// ===============================
-// 管理側：休業日設定（Holiday / Admin）
-// ===============================
-Route::prefix('admin')->group(function () {
-
-    Route::get('/holiday', [HolidayController::class, 'index'])
-        ->name('admin.holiday.index');
-
-    Route::get('/holiday/create', [HolidayController::class, 'create'])
-        ->name('admin.holiday.create');
-
-    Route::post('/holiday/store', [HolidayController::class, 'store'])
-        ->name('admin.holiday.store');
-
-    Route::post('/holiday/{holiday}/update', [HolidayController::class, 'update'])
-        ->name('admin.holiday.update');
-
-    Route::post('/holiday/{holiday}/delete', [HolidayController::class, 'destroy'])
-        ->name('admin.holiday.delete');
-});
-
-// ===============================
-// 管理側：お問い合わせ管理（contact / Admin）
-// ===============================
-Route::prefix('admin')->name('admin.')->group(function () {
-
-    Route::get('/contacts', [AdminContactController::class, 'index'])
-        ->name('contacts.index');
-
-    Route::patch('/contacts/{contact}/status', [AdminContactController::class, 'updateStatus'])
-        ->name('contacts.updateStatus');
-
-    Route::delete('/contacts/{contact}', [AdminContactController::class, 'destroy'])
-    ->name('contacts.destroy');
-
-});
-
-
-
-// ===============================
-// 仮ログイン（未使用）
-// ===============================
-// use Illuminate\Support\Facades\Auth;
-// use App\Models\User;
-//
-// Route::get('/test-login', function () {
-//     Auth::login(User::first());
-//     return redirect('/admin');
-// });
