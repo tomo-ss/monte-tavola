@@ -12,10 +12,17 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         // バリデーション（最低限）
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+        $credentials = $request->validate(
+            [
+                'email' => ['required', 'email'],
+                'password' => ['required'],
+            ],
+            [],
+            [
+                'email' => 'メールアドレス',
+                'password' => 'パスワード',
+            ]
+        );
 
         // 認証を試みる
         if (Auth::attempt($credentials)) {

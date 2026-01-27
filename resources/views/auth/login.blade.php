@@ -17,8 +17,20 @@
             業務管理システムログイン
         </h1>
 
-        <form method="POST" action="/login" class="space-y-10">
+        <form method="POST" action="/login" class="space-y-10" novalidate>
             @csrf
+
+
+            {{-- エラーメッセージ --}}
+            @if ($errors->any())
+                <ul class="text-sm text-red-600 bg-red-50 border border-red-200
+                            rounded px-4 py-3 space-y-1">
+
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            @endif
 
         {{-- メールアドレス --}}
         <div>
@@ -28,7 +40,6 @@
             <input
                 type="email"
                 name="email"
-                required
                 class="w-full rounded border border-gray-300 px-3 py-2
                     text-[#242424]
                     focus:outline-none focus:border-[#242424]"
@@ -43,26 +54,16 @@
             <input
                 type="password"
                 name="password"
-                required
                 class="w-full rounded border border-gray-300 px-3 py-2
                     text-[#242424]
                     focus:outline-none focus:border-[#242424]"
             >
         </div>
 
-
-            {{-- エラーメッセージ --}}
-            @if ($errors->any())
-                <p class="text-sm text-red-600">
-                    {{ $errors->first() }}
-                </p>
-            @endif
-
             {{-- ログインボタン --}}
             <button
                 type="submit"
-                class="mx-auto block w-2/3 mt-20 bg-gray-800 text-white py-2 rounded
-                    hover:bg-gray-700 transition"
+                class="mx-auto block w-2/3 mt-20 bg-[#233758] text-white py-2 rounded"
             >
                 ログイン
             </button>
