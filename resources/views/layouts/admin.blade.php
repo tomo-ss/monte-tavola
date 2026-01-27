@@ -25,12 +25,11 @@
                 <a href="/admin/contacts" class="hover:opacity-80">お問い合わせ管理</a>
             </nav>
 
-          {{-- 
+            
 <form method="POST" action="{{ route('logout') }}">
     @csrf
     <button type="submit">ログアウト</button>
 </form>
---}}
         </div>
     </header>
 
