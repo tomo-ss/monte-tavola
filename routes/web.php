@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\HolidayController;
 use App\Models\Holiday;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
+use App\Http\Controllers\Auth\LoginController;
 
 // ===============================
 // TOP
@@ -112,6 +113,12 @@ Route::get('/news/{id}', [UserNewsController::class, 'show'])
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
+
+Route::post('/login', [LoginController::class, 'login'])
+    ->name('login.post');
+
+Route::post('/logout', [LoginController::class, 'logout'])
+    ->name('logout');
 
 
 // ===============================

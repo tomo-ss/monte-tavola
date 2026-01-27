@@ -8,6 +8,7 @@
     <h1>業務管理システムログイン</h1>
 
     <form method="POST" action="/login">
+        @csrf
         <div>
             <label>メールアドレス</label>
             <input type="email" name="email">
